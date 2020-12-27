@@ -35,9 +35,6 @@ public:
     {
         // update internal pointers (value, descriptors and characteristics array)
         _hid_characteristics[0] = &_angle_char;
- 
-        // setup authorization handlers
-        // _angle_char.setWriteAuthorizationCallback(this, &Self::authorize_client_write);
     }
  
     void start(BLE &ble_interface, events::EventQueue &event_queue)
@@ -227,10 +224,10 @@ private:
  
     ReadNotifyCharacteristic<uint8_t> _angle_char;
  
-    // list of the characteristics of the clock service
+    // list of the characteristics of the hid service
     GattCharacteristic* _hid_characteristics[3];
  
-    // demo service
+    // service
     GattService _hid_service;
  
     GattServer* _server;
