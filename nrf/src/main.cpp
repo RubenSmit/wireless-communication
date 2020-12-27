@@ -312,30 +312,28 @@ private:
     }
  
     /**
-     * Read, Write, Notify, Indicate  Characteristic declaration helper.
+     * Read, Indicate  Characteristic declaration helper.
      *
      * @tparam T type of data held by the characteristic.
      */
     template<typename T>
-    class ReadWriteNotifyIndicateCharacteristic : public GattCharacteristic {
+    class ReadNotifyCharacteristic : public GattCharacteristic {
     public:
         /**
-         * Construct a characteristic that can be read or written and emit
-         * notification or indication.
+         * Construct a characteristic that can be read and emit
+         * notification.
          *
          * @param[in] uuid The UUID of the characteristic.
          * @param[in] initial_value Initial value contained by the characteristic.
          */
-        ReadWriteNotifyIndicateCharacteristic(const UUID & uuid, const T& initial_value) :
+        ReadNotifyCharacteristic(const UUID & uuid, const T& initial_value) :
             GattCharacteristic(
                 /* UUID */ uuid,
                 /* Initial value */ &_value,
                 /* Value size */ sizeof(_value),
                 /* Value capacity */ sizeof(_value),
                 /* Properties */ GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ |
-                                GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_WRITE |
-                                GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_NOTIFY |
-                                GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_INDICATE,
+                                GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_NOTIFY,
                 /* Descriptors */ NULL,
                 /* Num descriptors */ 0,
                 /* variable len */ false
@@ -376,9 +374,9 @@ private:
         uint8_t _value;
     };
  
-    ReadWriteNotifyIndicateCharacteristic<uint8_t> _hour_char;
-    ReadWriteNotifyIndicateCharacteristic<uint8_t> _minute_char;
-    ReadWriteNotifyIndicateCharacteristic<uint8_t> _second_char;
+    ReadNotifyCharacteristic<uint8_t> _hour_char;
+    ReadNotifyCharacteristic<uint8_t> _minute_char;
+    ReadNotifyCharacteristic<uint8_t> _second_char;
  
     // list of the characteristics of the clock service
     GattCharacteristic* _clock_characteristics[3];
