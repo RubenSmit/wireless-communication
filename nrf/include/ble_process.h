@@ -126,7 +126,7 @@ public:
     /** Name we advertise as. */
     virtual const char* get_device_name()
     {
-        static const char name[] = "BleProcess";
+        static const char name[] = "Angle Sensor";
         return name;
     }
 

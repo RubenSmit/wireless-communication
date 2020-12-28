@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">wireless_communication</string>
+    <string name="app_name">Wireless Communication</string>
     <string name="action_settings">Settings</string>
+
+    <string name="main_sensor_angle">Sensor angle</string>
+    <string name="main_servo_angle">Servo angle</string>
+    <string name="main_manual_override">Manual servo angle override</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
