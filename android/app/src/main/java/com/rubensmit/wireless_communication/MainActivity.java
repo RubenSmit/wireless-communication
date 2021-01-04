@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             BluetoothAdapter.getDefaultAdapter().getBluetoothLeScanner();
     private boolean mScanning;
     private Handler handler = new Handler();
-    private ArrayList<BluetoothDevice> bluetoothDevices;
+    private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
 
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bluetoothDevices.clear();
                 scanLeDevice();
             }
         });
     }
 
     private void scanLeDevice() {
+        bluetoothDevices.clear();
         if (!mScanning) {
             // Stops scanning after a pre-defined scan period.
             handler.postDelayed(new Runnable() {
