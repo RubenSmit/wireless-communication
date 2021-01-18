@@ -10,10 +10,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 
-import com.rubensmit.wireless_communication.activities.MainActivity;
-import com.rubensmit.wireless_communication.adapters.BluetoothDevicesListAdapter;
-import com.rubensmit.wireless_communication.providers.BluetoothDevicesProvider;
-
 import java.util.Observable;
 import java.util.UUID;
 
@@ -35,7 +31,8 @@ public class Device extends Observable {
     public final static UUID UUID_PLANE_ANGLE_CHARACTERISTIC =
             UUID.fromString("00002763-0000-1000-8000-00805f9b34fb");
 
-    public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+    public final static UUID CLIENT_CHARACTERISTIC_CONFIG =
+            UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
 
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
@@ -63,11 +60,9 @@ public class Device extends Observable {
                 Log.i(TAG, "Connected to GATT server.");
                 Log.i(TAG, "Attempting to start service discovery:" +
                         bluetoothGatt.discoverServices());
-                broadcastChanges();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 connectionState = STATE_DISCONNECTED;
                 Log.i(TAG, "Disconnected from GATT server for device: " + device.getName());
-                broadcastChanges();
             }
         }
 
@@ -97,17 +92,27 @@ public class Device extends Observable {
 
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 Log.i(TAG, "Characteristic read!");
-                final byte[] data = characteristic.getValue();
-                if (data != null && data.length > 0) {
-                    final StringBuilder stringBuilder = new StringBuilder(data.length);
-                    for(byte byteChar : data)
-                        stringBuilder.append(String.format("%02X ", byteChar));
-                    Log.i(TAG, "Data raw: " + stringBuilder.toString().trim());
-                    setAngle(Integer.parseInt(stringBuilder.toString().trim()));
+                int flag = characteristic.getProperties();
+                int format = -1;
+                if ((flag & 0x01) != 0) {
+                    format = BluetoothGattCharacteristic.FORMAT_UINT16;
+                    Log.d(TAG, "Angle format UINT16.");
+                } else {
+                    format = BluetoothGattCharacteristic.FORMAT_UINT8;
+                    Log.d(TAG, "Angle format UINT8.");
                 }
+                final int sensorAngle = characteristic.getIntValue(format, 0);
+                Log.i(TAG, "Data raw: " + sensorAngle);
+                setAngle(sensorAngle);
             } else {
                 Log.w(TAG, "onCharacteristicRead received: " + status);
             }
+        }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            super.onCharacteristicWrite(gatt, characteristic, status);
+            Log.i(TAG, "Characteristic written!");
         }
     };
 
@@ -124,7 +129,6 @@ public class Device extends Observable {
                 deviceType = TYPE_SERVO;
             }
         }
-        broadcastChanges();
     }
 
     private void subscribeToSensorData(BluetoothGattService service) {
@@ -134,8 +138,7 @@ public class Device extends Observable {
 
         BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID_PLANE_ANGLE_CHARACTERISTIC);
         bluetoothGatt.setCharacteristicNotification(characteristic, true);
-        BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                UUID.fromString(CLIENT_CHARACTERISTIC_CONFIG));
+        BluetoothGattDescriptor descriptor = characteristic.getDescriptor(CLIENT_CHARACTERISTIC_CONFIG);
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
         bluetoothGatt.writeDescriptor(descriptor);
 
@@ -146,12 +149,18 @@ public class Device extends Observable {
 
     private void setAngle(int angle) {
         this.angle = angle;
-        broadcastChanges();
-    }
-
-    private void broadcastChanges() {
         setChanged();
         notifyObservers();
+    }
+
+    public void writeAngle(int angle) {
+        this.angle = angle;
+        Log.i(TAG, "Set angle to: " + angle);
+
+        BluetoothGattService service = bluetoothGatt.getService(UUID_GENERIC_ATTRIBUTE_SERVICE);
+        BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID_PLANE_ANGLE_CHARACTERISTIC);
+        characteristic.setValue(angle, BluetoothGattCharacteristic.FORMAT_UINT8, 0);
+        bluetoothGatt.writeCharacteristic(characteristic);
     }
 
     public BluetoothDevice getDevice() {
@@ -190,6 +199,7 @@ public class Device extends Observable {
             return;
         }
         bluetoothGatt.close();
+        bluetoothGatt.disconnect();
         bluetoothGatt = null;
     }
 

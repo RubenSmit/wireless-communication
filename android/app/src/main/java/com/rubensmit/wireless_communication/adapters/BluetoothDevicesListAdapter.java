@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,10 +16,8 @@ import com.rubensmit.wireless_communication.models.Device;
 import com.rubensmit.wireless_communication.providers.BluetoothDevicesProvider;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements Observer {
+public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<Device> devicesList;
 
@@ -92,6 +91,7 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     private void bindSensorView(SensorViewHolder holder, final Device device) {
         holder.tvName.setText(device.getDeviceName());
         holder.tvStatus.setText(device.getConnectionStatus());
+
         if (device.getAngle() >= 0) {
             holder.tvAngle.setText(String.valueOf(device.getAngle()));
             holder.pbAngle.setProgress(device.getAngle());
@@ -108,6 +108,29 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     private void bindServoView(ServoViewHolder holder, final Device device) {
         holder.tvName.setText(device.getDeviceName());
         holder.tvStatus.setText(device.getConnectionStatus());
+        if (device.getAngle() >= 0) {
+            holder.tvAngle.setText(String.valueOf(device.getAngle()));
+            holder.sbAngle.setProgress(device.getAngle());
+        } else {
+            holder.tvAngle.setText("unset");
+        }
+
+        holder.sbAngle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                device.writeAngle(seekBar.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     /**
@@ -118,11 +141,6 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     private void bindUnknownView(UnknownViewHolder holder, final Device device) {
         holder.tvName.setText(device.getDeviceName());
         holder.tvStatus.setText(device.getConnectionStatus());
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        notifyDataSetChanged();
     }
 
     /**
@@ -154,12 +172,16 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
 
         public TextView tvName;
         public TextView tvStatus;
+        public TextView tvAngle;
+        public SeekBar sbAngle;
 
         public ServoViewHolder(View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tvServoName);
             tvStatus = itemView.findViewById(R.id.tvServoStatus);
+            tvAngle = itemView.findViewById(R.id.tvServoAngle);
+            sbAngle = itemView.findViewById(R.id.sbServoAngle);
         }
     }
 

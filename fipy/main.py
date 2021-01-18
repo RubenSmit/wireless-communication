@@ -27,6 +27,7 @@ def char1_cb_handler(chr, data):
         currentAngle = int.from_bytes(value, "big")
         setServoPwn(currentAngle)
         chr1.value(currentAngle)
+        print("Set new angle: ", currentAngle)
 
 def setServoPwn(angle):
     servo.duty_cycle(((angle / 180) * 0.05) + 0.05)
@@ -35,6 +36,8 @@ bluetooth = Bluetooth()
 bluetooth.set_advertisement(name='Fypi')
 bluetooth.callback(trigger=Bluetooth.CLIENT_CONNECTED | Bluetooth.CLIENT_DISCONNECTED, handler=conn_cb)
 bluetooth.advertise(True)
+
+print("Started BLE")
 
 srv1 = bluetooth.service(uuid=0x1843 , isprimary=True)
 chr1 = srv1.characteristic(uuid=0x2763 , value=currentAngle)

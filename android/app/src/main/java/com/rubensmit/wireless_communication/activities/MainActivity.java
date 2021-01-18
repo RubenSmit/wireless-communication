@@ -5,7 +5,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,12 +19,15 @@ import com.rubensmit.wireless_communication.adapters.BluetoothDevicesListAdapter
 import com.rubensmit.wireless_communication.models.Device;
 import com.rubensmit.wireless_communication.providers.BluetoothDevicesProvider;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.os.ParcelUuid;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +37,10 @@ import android.view.MenuItem;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
@@ -94,6 +103,19 @@ public class MainActivity extends AppCompatActivity {
             }, SCAN_PERIOD);
 
             mScanning = true;
+//
+//            List<ScanFilter> filters = new ArrayList<>();
+//            filters.add(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(Device.UUID_HUMAN_INTERFACE_DEVICE_SERVICE)).build());
+//            filters.add(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(Device.UUID_GENERIC_ATTRIBUTE_SERVICE)).build());
+//
+//            ScanSettings settings = new ScanSettings.Builder()
+//                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
+//                    .setMatchMode(ScanSettings.MATCH_MODE_STICKY)
+//                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
+//                    .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
+//                    .build();
+//
+//            bluetoothLeScanner.startScan(filters, settings, leScanCallback);
             bluetoothLeScanner.startScan(leScanCallback);
         } else {
             mScanning = false;
