@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private boolean mScanning;
     private Handler handler = new Handler();
 
+    public final static String UUID_HUMAN_INTERFACE_DEVICE_SERVICE = "00001812-0000-1000-8000-00805f9b34fb";
+    public final static String UUID_GENERIC_ATTRIBUTE_SERVICE = "00001843-0000-1000-8000-00805f9b34fb";
+
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
 
@@ -107,20 +110,21 @@ public class MainActivity extends AppCompatActivity implements Observer {
             }, SCAN_PERIOD);
 
             mScanning = true;
-//
-//            List<ScanFilter> filters = new ArrayList<>();
-//            filters.add(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(Device.UUID_HUMAN_INTERFACE_DEVICE_SERVICE)).build());
-//            filters.add(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(Device.UUID_GENERIC_ATTRIBUTE_SERVICE)).build());
-//
-//            ScanSettings settings = new ScanSettings.Builder()
-//                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
-//                    .setMatchMode(ScanSettings.MATCH_MODE_STICKY)
-//                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
-//                    .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
-//                    .build();
-//
-//            bluetoothLeScanner.startScan(filters, settings, leScanCallback);
-            bluetoothLeScanner.startScan(leScanCallback);
+
+            List<ScanFilter> filters = new ArrayList<>();
+            ScanFilter humanInterfaceFilter = new ScanFilter.Builder()
+                    .setDeviceName("Fypi")
+                    .build();
+            filters.add(humanInterfaceFilter);
+            ScanFilter genericAttributeFilter = new ScanFilter.Builder()
+                    .setDeviceName("BleProcess")
+                    .build();
+            filters.add(genericAttributeFilter);
+
+            ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
+
+            bluetoothLeScanner.startScan(filters, settings, leScanCallback);
+//            bluetoothLeScanner.startScan(leScanCallback);
         } else {
             mScanning = false;
             bluetoothLeScanner.stopScan(leScanCallback);
