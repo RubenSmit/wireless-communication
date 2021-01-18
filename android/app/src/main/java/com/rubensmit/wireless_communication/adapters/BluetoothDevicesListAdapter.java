@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -91,6 +92,12 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     private void bindSensorView(SensorViewHolder holder, final Device device) {
         holder.tvName.setText(device.getDeviceName());
         holder.tvStatus.setText(device.getConnectionStatus());
+        if (device.getAngle() >= 0) {
+            holder.tvAngle.setText(String.valueOf(device.getAngle()));
+            holder.pbAngle.setProgress(device.getAngle());
+        } else {
+            holder.tvAngle.setText("unknown");
+        }
     }
 
     /**
@@ -126,12 +133,16 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
 
         public TextView tvName;
         public TextView tvStatus;
+        public TextView tvAngle;
+        public ProgressBar pbAngle;
 
         public SensorViewHolder(View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tvSensorName);
             tvStatus = itemView.findViewById(R.id.tvSensorStatus);
+            tvAngle = itemView.findViewById(R.id.tvSensorAngle);
+            pbAngle = itemView.findViewById(R.id.pbSensorAngle);
         }
     }
 

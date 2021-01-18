@@ -7,7 +7,7 @@
     tools:context=".fragments.FirstFragment">
 
     <ProgressBar
-        android:id="@+id/pb_sensor_angle"
+        android:id="@+id/pbSensorAngle"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="20dp"

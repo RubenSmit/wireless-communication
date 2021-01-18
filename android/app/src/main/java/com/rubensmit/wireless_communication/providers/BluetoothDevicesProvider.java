@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
 /**
  * BluetoothDevicesProvider
@@ -18,7 +17,7 @@ import java.util.Observable;
  *
  * @author Ruben
  */
-public class BluetoothDevicesProvider extends Observable {
+public class BluetoothDevicesProvider {
 
     //List with al the devices
     public static List<Device> deviceList;
@@ -49,6 +48,10 @@ public class BluetoothDevicesProvider extends Observable {
      * Clears the list of devices
      */
     public static void clear() {
+        for(Device device: deviceList) {
+            device.disconnect();
+        }
+
         deviceList.clear();
         deviceMap.clear();
         adapter.notifyDataSetChanged();

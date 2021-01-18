@@ -18,7 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.rubensmit.wireless_communication.R;
 import com.rubensmit.wireless_communication.adapters.BluetoothDevicesListAdapter;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class FirstFragment extends Fragment {
+
+    BluetoothDevicesListAdapter bluetoothDevicesListAdapter;
 
     @Override
     public View onCreateView(
@@ -35,7 +40,8 @@ public class FirstFragment extends Fragment {
         RecyclerView rvDevicesList = view.findViewById(R.id.rvDevicesList);
         rvDevicesList.setHasFixedSize(false);
         rvDevicesList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        rvDevicesList.setAdapter(new BluetoothDevicesListAdapter(view.getContext()));
+        bluetoothDevicesListAdapter = new BluetoothDevicesListAdapter(view.getContext());
+        rvDevicesList.setAdapter(bluetoothDevicesListAdapter);
 
 //        SeekBar seekBar = view.findViewById(R.id.sb_servo_angle);
 //        TextView servoAngle = view.findViewById(R.id.tv_servo_angle);

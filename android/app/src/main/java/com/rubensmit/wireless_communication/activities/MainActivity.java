@@ -32,6 +32,8 @@ import android.view.MenuItem;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
