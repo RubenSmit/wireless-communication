@@ -1,4 +1,4 @@
-package com.rubensmit.wireless_communication;
+package com.rubensmit.wireless_communication.activities;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -12,11 +12,18 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.rubensmit.wireless_communication.R;
+import com.rubensmit.wireless_communication.adapters.BluetoothDevicesListAdapter;
+import com.rubensmit.wireless_communication.models.Device;
+import com.rubensmit.wireless_communication.providers.BluetoothDevicesProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -28,6 +35,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG = "MAIN_ACTIVITY";
+
     BluetoothAdapter bluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
 
@@ -36,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             BluetoothAdapter.getDefaultAdapter().getBluetoothLeScanner();
     private boolean mScanning;
     private Handler handler = new Handler();
-    private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
 
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
@@ -70,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void scanLeDevice() {
-        bluetoothDevices.clear();
+        Log.i(TAG, "Started scanning for devices");
+        BluetoothDevicesProvider.clear();
         if (!mScanning) {
             // Stops scanning after a pre-defined scan period.
             handler.postDelayed(new Runnable() {
@@ -78,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     mScanning = false;
                     bluetoothLeScanner.stopScan(leScanCallback);
+                    Log.i(TAG, "Stopped scanning for devices");
                 }
             }, SCAN_PERIOD);
 
@@ -86,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mScanning = false;
             bluetoothLeScanner.stopScan(leScanCallback);
+            Log.i(TAG, "Stopped scanning for devices");
         }
     }
 
@@ -93,8 +104,13 @@ public class MainActivity extends AppCompatActivity {
             new ScanCallback() {
                 @Override
                 public void onScanResult(int callbackType, ScanResult result) {
+                    Log.i(TAG, "Found a bluetooth device!");
                     super.onScanResult(callbackType, result);
-                    bluetoothDevices.add(result.getDevice());
+                    BluetoothDevice device = result.getDevice();
+                    if (!BluetoothDevicesProvider.contains(device.getAddress())) {
+                        Log.i(TAG, "Adding new device to list");
+                        BluetoothDevicesProvider.addDevice(new Device(device, getBaseContext()));
+                    }
                 }
             };
 
