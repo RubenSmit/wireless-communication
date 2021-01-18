@@ -21,6 +21,7 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     private Context context;
     private List<Device> devicesList;
 
+    private final int UNKNOWN = 0;
     private final int SENSOR = 1;
     private final int SERVO = 2;
 
@@ -52,6 +53,9 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
             case SERVO :
                 View servoView = LayoutInflater.from(context).inflate(R.layout.devices_list_item_servo, parent,  false);
                 return new ServoViewHolder(servoView);
+            case UNKNOWN :
+                View unknownView = LayoutInflater.from(context).inflate(R.layout.devices_list_item_unknown, parent,  false);
+                return new UnknownViewHolder(unknownView);
             default :
                 return null;
         }
@@ -73,6 +77,9 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
             case SERVO :
                 bindServoView((ServoViewHolder) holder, devicesList.get(position));
                 break;
+            case UNKNOWN :
+                bindUnknownView((UnknownViewHolder) holder, devicesList.get(position));
+                break;
         }
     }
 
@@ -92,6 +99,16 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
      * @param device
      */
     private void bindServoView(ServoViewHolder holder, final Device device) {
+        holder.tvName.setText(device.getDeviceName());
+        holder.tvStatus.setText(device.getConnectionStatus());
+    }
+
+    /**
+     * Bind the view and add values to the view
+     * @param holder
+     * @param device
+     */
+    private void bindUnknownView(UnknownViewHolder holder, final Device device) {
         holder.tvName.setText(device.getDeviceName());
         holder.tvStatus.setText(device.getConnectionStatus());
     }
@@ -136,6 +153,24 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     }
 
     /**
+     * UnknownViewHolder
+     * Holder of the servo view
+     */
+    private class UnknownViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView tvName;
+        public TextView tvStatus;
+
+        public UnknownViewHolder(View itemView) {
+            super(itemView);
+
+            tvName = itemView.findViewById(R.id.tvUnknownName);
+            tvStatus = itemView.findViewById(R.id.tvUnknownStatus);
+        }
+    }
+
+
+    /**
      * Get the amount of devices
      * @return amount of devices
      */
@@ -152,7 +187,13 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter implements
     @Override
     public int getItemViewType(int position) {
         Device device = BluetoothDevicesProvider.deviceList.get(position);
-        device.addObserver(this);
-        return device.getDeviceType();
+
+        if(device.getDeviceType() == SENSOR){
+            return SENSOR;
+        } else if (device.getDeviceType() == SERVO) {
+            return SERVO;
+        } else {
+            return UNKNOWN;
+        }
     }
 }

@@ -106,10 +106,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onScanResult(int callbackType, ScanResult result) {
                     Log.i(TAG, "Found a bluetooth device!");
                     super.onScanResult(callbackType, result);
-                    BluetoothDevice device = result.getDevice();
-                    if (!BluetoothDevicesProvider.contains(device.getAddress())) {
+                    BluetoothDevice bluetoothDevice = result.getDevice();
+                    if (!BluetoothDevicesProvider.contains(bluetoothDevice.getAddress())) {
                         Log.i(TAG, "Adding new device to list");
-                        BluetoothDevicesProvider.addDevice(new Device(device, getBaseContext()));
+                        Device device = new Device(bluetoothDevice, getContext());
+                        BluetoothDevicesProvider.addDevice(device);
                     }
                 }
             };
@@ -134,5 +135,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Context getContext() {
+        return (Context)this;
     }
 }

@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
@@ -17,7 +18,7 @@ public class Device extends Observable {
     private BluetoothDevice device;
     BluetoothGatt bluetoothGatt;
     private int connectionState = STATE_DISCONNECTED;
-    private int deviceType = TYPE_SENSOR;
+    private int deviceType = TYPE_UNKNOWN;
 
     public final static UUID UUID_HUMAN_INTERFACE_DEVICE_SERVICE =
             UUID.fromString("00001812-0000-1000-8000-00805f9b34fb");
@@ -28,8 +29,9 @@ public class Device extends Observable {
     private static final int STATE_CONNECTING = 1;
     private static final int STATE_CONNECTED = 2;
 
-    private static final int TYPE_SENSOR = 0;
-    private static final int TYPE_SERVO = 1;
+    private static final int TYPE_UNKNOWN = 0;
+    private static final int TYPE_SENSOR = 1;
+    private static final int TYPE_SERVO = 2;
 
     public Device(BluetoothDevice bluetoothDevice, Context context) {
         this.device = bluetoothDevice;
@@ -64,6 +66,7 @@ public class Device extends Observable {
 
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 Log.i(TAG, "Gatt services discovered!");
+                setServiceType(gatt);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
             }
@@ -81,6 +84,20 @@ public class Device extends Observable {
             }
         }
     };
+
+    private void setServiceType(BluetoothGatt gatt) {
+        for (BluetoothGattService service: gatt.getServices()) {
+            UUID uuid = service.getUuid();
+            Log.i(TAG, "Found service: " + uuid + " for device: " + device.getName());
+            if (uuid.equals(UUID_HUMAN_INTERFACE_DEVICE_SERVICE)) {
+                Log.i(TAG, "This is a sensor!");
+                deviceType = TYPE_SENSOR;
+                service.getCharacteristics();
+            }
+        }
+        setChanged();
+        notifyObservers();
+    }
 
     public BluetoothDevice getDevice() {
         return device;
