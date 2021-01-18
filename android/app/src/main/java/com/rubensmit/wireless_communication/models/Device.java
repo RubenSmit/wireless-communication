@@ -67,6 +67,9 @@ public class Device extends Observable implements Observer {
                 connectionState = STATE_DISCONNECTED;
                 Log.i(TAG, "Disconnected from GATT server for device: " + device.getName());
             }
+
+            setChanged();
+            notifyObservers();
         }
 
         @Override
@@ -151,19 +154,27 @@ public class Device extends Observable implements Observer {
     }
 
     private void setAngle(int angle) {
-        this.angle = angle;
-        setChanged();
-        notifyObservers();
+        if (angle != this.angle) {
+            this.angle = angle;
+            setChanged();
+            notifyObservers();
+        }
     }
 
-    public void writeAngle(int angle) {
-        this.angle = angle;
-        Log.i(TAG, "Set angle to: " + angle);
+    public void writeAngle(int angle, boolean notify) {
+        if (angle != this.angle) {
+            this.angle = angle;
+            if (notify) {
+                setChanged();
+                notifyObservers();
+            }
+            Log.i(TAG, "Set angle to: " + angle);
 
-        BluetoothGattService service = bluetoothGatt.getService(UUID_GENERIC_ATTRIBUTE_SERVICE);
-        BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID_PLANE_ANGLE_CHARACTERISTIC);
-        characteristic.setValue(angle, BluetoothGattCharacteristic.FORMAT_UINT8, 0);
-        bluetoothGatt.writeCharacteristic(characteristic);
+            BluetoothGattService service = bluetoothGatt.getService(UUID_GENERIC_ATTRIBUTE_SERVICE);
+            BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID_PLANE_ANGLE_CHARACTERISTIC);
+            characteristic.setValue(angle, BluetoothGattCharacteristic.FORMAT_UINT8, 0);
+            bluetoothGatt.writeCharacteristic(characteristic);
+        }
     }
 
     public BluetoothDevice getDevice() {
@@ -228,12 +239,16 @@ public class Device extends Observable implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         if (deviceType == TYPE_SERVO && use_source && source != null) {
-            writeAngle(source.getAngle());
+            writeAngle(source.getAngle(), true);
         }
     }
 
     @Override
     public String toString() {
         return device.getName();
+    }
+
+    public Device getSource() {
+        return source;
     }
 }

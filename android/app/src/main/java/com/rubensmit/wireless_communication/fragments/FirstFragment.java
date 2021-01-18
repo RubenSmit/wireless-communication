@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rubensmit.wireless_communication.R;
+import com.rubensmit.wireless_communication.activities.MainActivity;
 import com.rubensmit.wireless_communication.adapters.BluetoothDevicesListAdapter;
 
 import java.util.Timer;
@@ -23,7 +24,7 @@ import java.util.TimerTask;
 
 public class FirstFragment extends Fragment {
 
-    BluetoothDevicesListAdapter bluetoothDevicesListAdapter;
+    MainActivity activity;
 
     @Override
     public View onCreateView(
@@ -37,38 +38,12 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        activity = (MainActivity) getActivity();
+
         RecyclerView rvDevicesList = view.findViewById(R.id.rvDevicesList);
         rvDevicesList.setHasFixedSize(false);
         rvDevicesList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        bluetoothDevicesListAdapter = new BluetoothDevicesListAdapter(view.getContext());
-        rvDevicesList.setAdapter(bluetoothDevicesListAdapter);
-
-//        SeekBar seekBar = view.findViewById(R.id.sb_servo_angle);
-//        TextView servoAngle = view.findViewById(R.id.tv_servo_angle);
-//        ProgressBar progressBar = view.findViewById(R.id.pb_sensor_angle);
-//        TextView sensorAngle = view.findViewById(R.id.tv_sensor_angle);
-//
-//        servoAngle.setText(seekBar.getProgress() + " degrees");
-//        sensorAngle.setText(seekBar.getProgress() + " degrees");
-//        progressBar.setProgress(seekBar.getProgress());
-//
-//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-//                servoAngle.setText(seekBar.getProgress() + " degrees");
-//                sensorAngle.setText(seekBar.getProgress() + " degrees");
-//                progressBar.setProgress(seekBar.getProgress());
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
+        rvDevicesList.setAdapter(activity.bluetoothDevicesListAdapter);
+        activity.bluetoothDevicesListAdapter.notifyDataSetChanged();
     }
 }

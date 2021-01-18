@@ -1,5 +1,6 @@
 package com.rubensmit.wireless_communication.activities;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -45,11 +46,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Observer {
     private final static String TAG = "MAIN_ACTIVITY";
 
     BluetoothAdapter bluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
+    public BluetoothDevicesListAdapter bluetoothDevicesListAdapter;
 
     // BLE scanner
     private BluetoothLeScanner bluetoothLeScanner =
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
+
+        bluetoothDevicesListAdapter = new BluetoothDevicesListAdapter(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "Adding new device to list");
                         Device device = new Device(bluetoothDevice, getContext());
                         BluetoothDevicesProvider.addDevice(device);
+                        device.addObserver(getObserver());
                     }
                 }
             };
@@ -163,5 +168,20 @@ public class MainActivity extends AppCompatActivity {
 
     public Context getContext() {
         return (Context)this;
+    }
+
+    public Observer getObserver() {
+        return this;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                int index = BluetoothDevicesProvider.deviceList.indexOf((Device) observable);
+                bluetoothDevicesListAdapter.notifyItemChanged(index);
+            }
+        });
     }
 }

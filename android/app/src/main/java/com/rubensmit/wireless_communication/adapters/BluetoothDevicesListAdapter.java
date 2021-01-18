@@ -123,7 +123,8 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (!device.usesSource()) {
-                    device.writeAngle(seekBar.getProgress());
+                    device.writeAngle(seekBar.getProgress(), false);
+                    holder.tvAngle.setText(String.valueOf(seekBar.getProgress()));
                 }
             }
 
@@ -147,6 +148,9 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
         }
         ArrayAdapter<Device> spinnerAdapter = new ArrayAdapter(context, R.layout.source_list_item, R.id.tvSourceName, sources.toArray());
         holder.spSource.setAdapter(spinnerAdapter);
+        if (device.usesSource()) {
+            holder.spSource.setSelection(sources.indexOf(device.getSource()));
+        }
 
         holder.spSource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
