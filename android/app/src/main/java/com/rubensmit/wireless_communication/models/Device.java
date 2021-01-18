@@ -30,7 +30,7 @@ public class Device extends Observable {
     public final static UUID UUID_HUMAN_INTERFACE_DEVICE_SERVICE =
             UUID.fromString("00001812-0000-1000-8000-00805f9b34fb");
     public final static UUID UUID_GENERIC_ATTRIBUTE_SERVICE =
-            UUID.fromString("00001801-0000-1000-8000-00805f9b34fb");
+            UUID.fromString("00001843-0000-1000-8000-00805f9b34fb");
 
     public final static UUID UUID_PLANE_ANGLE_CHARACTERISTIC =
             UUID.fromString("00002763-0000-1000-8000-00805f9b34fb");
@@ -119,6 +119,9 @@ public class Device extends Observable {
                 Log.i(TAG, "This is a sensor!");
                 deviceType = TYPE_SENSOR;
                 subscribeToSensorData(service);
+            } else if (uuid.equals(UUID_GENERIC_ATTRIBUTE_SERVICE)) {
+                Log.i(TAG, "This is a servo!");
+                deviceType = TYPE_SERVO;
             }
         }
         broadcastChanges();
