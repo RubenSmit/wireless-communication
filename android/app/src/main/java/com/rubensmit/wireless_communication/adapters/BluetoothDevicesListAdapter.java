@@ -4,8 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import com.rubensmit.wireless_communication.R;
 import com.rubensmit.wireless_communication.models.Device;
 import com.rubensmit.wireless_communication.providers.BluetoothDevicesProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
@@ -118,7 +122,9 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
         holder.sbAngle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                device.writeAngle(seekBar.getProgress());
+                if (!device.usesSource()) {
+                    device.writeAngle(seekBar.getProgress());
+                }
             }
 
             @Override
@@ -128,6 +134,33 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        List<Device> sources = new ArrayList<>();
+        sources.add(device);
+        for (Device sourceDevice: BluetoothDevicesProvider.deviceList) {
+            if (!sourceDevice.equals(device) && sourceDevice.getDeviceType() == SENSOR) {
+                sources.add(sourceDevice);
+            }
+        }
+        ArrayAdapter<Device> spinnerAdapter = new ArrayAdapter(context, R.layout.source_list_item, R.id.tvSourceName, sources.toArray());
+        holder.spSource.setAdapter(spinnerAdapter);
+
+        holder.spSource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Device source = sources.get(i);
+                if (source.equals(device)) {
+                    device.unsetSource();
+                } else {
+                    device.setSource(source);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -174,6 +207,7 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
         public TextView tvStatus;
         public TextView tvAngle;
         public SeekBar sbAngle;
+        public Spinner spSource;
 
         public ServoViewHolder(View itemView) {
             super(itemView);
@@ -182,6 +216,7 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
             tvStatus = itemView.findViewById(R.id.tvServoStatus);
             tvAngle = itemView.findViewById(R.id.tvServoAngle);
             sbAngle = itemView.findViewById(R.id.sbServoAngle);
+            spSource = itemView.findViewById(R.id.spServoSource);
         }
     }
 

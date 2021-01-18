@@ -11,9 +11,10 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 
-public class Device extends Observable {
+public class Device extends Observable implements Observer {
     private final static String TAG = "DEVICE";
 
     private BluetoothDevice device;
@@ -22,6 +23,8 @@ public class Device extends Observable {
     private int connectionState = STATE_DISCONNECTED;
     private int deviceType = TYPE_UNKNOWN;
     private int angle = -1;
+    private Device source;
+    private boolean use_source;
 
     public final static UUID UUID_HUMAN_INTERFACE_DEVICE_SERVICE =
             UUID.fromString("00001812-0000-1000-8000-00805f9b34fb");
@@ -203,4 +206,34 @@ public class Device extends Observable {
         bluetoothGatt = null;
     }
 
+    public void setSource(Device source) {
+        if (source.getDeviceType() == TYPE_SENSOR) {
+            this.source = source;
+            use_source = true;
+            source.addObserver(this);
+        }
+    }
+
+    public void unsetSource() {
+        use_source = false;
+        if (source != null) {
+            source.deleteObserver(this);
+        }
+    }
+
+    public boolean usesSource() {
+        return use_source;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        if (deviceType == TYPE_SERVO && use_source && source != null) {
+            writeAngle(source.getAngle());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return device.getName();
+    }
 }
