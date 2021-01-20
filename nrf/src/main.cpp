@@ -119,11 +119,12 @@ private:
     }
  
     /**
-     * Increment the second counter.
+     * Read the angle and update the characteristic.
      */
     void read_angle(void)
     {
-        uint8_t angle = (uint8_t) map(_angle_sensor.read(), 0, 1, 0, 360);
+        uint8_t angle = (uint8_t) map(_angle_sensor.read(), 0, 1, 0, 180);
+        printf("read angle as %i\r\n", angle);
  
         ble_error_t err = _angle_char.set(*_server, angle);
         if (err) {
@@ -133,7 +134,7 @@ private:
     }
 
     /**
-     * Map a value in a range to another range
+     * Map a value in a range to another range.
      */
     float map(float x, float in_min, float in_max, float out_min, float out_max)
     {

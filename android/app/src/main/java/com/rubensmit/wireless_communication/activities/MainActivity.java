@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private boolean mScanning;
     private Handler handler = new Handler();
 
-    public final static String UUID_HUMAN_INTERFACE_DEVICE_SERVICE = "00001812-0000-1000-8000-00805f9b34fb";
-    public final static String UUID_GENERIC_ATTRIBUTE_SERVICE = "00001843-0000-1000-8000-00805f9b34fb";
-
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
 
@@ -113,11 +110,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             List<ScanFilter> filters = new ArrayList<>();
             ScanFilter humanInterfaceFilter = new ScanFilter.Builder()
-                    .setDeviceName("Fypi")
+                    .setDeviceName("FyPi")
                     .build();
             filters.add(humanInterfaceFilter);
             ScanFilter genericAttributeFilter = new ScanFilter.Builder()
-                    .setDeviceName("BleProcess")
+                    .setDeviceName("NRF52")
                     .build();
             filters.add(genericAttributeFilter);
 
@@ -147,28 +144,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     }
                 }
             };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public Context getContext() {
         return (Context)this;

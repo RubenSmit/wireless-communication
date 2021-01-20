@@ -33,7 +33,7 @@ def setServoPwn(angle):
     servo.duty_cycle(((angle / 180) * 0.05) + 0.05)
 
 bluetooth = Bluetooth()
-bluetooth.set_advertisement(name='Fypi')
+bluetooth.set_advertisement(name='FyPi')
 bluetooth.callback(trigger=Bluetooth.CLIENT_CONNECTED | Bluetooth.CLIENT_DISCONNECTED, handler=conn_cb)
 bluetooth.advertise(True)
 
