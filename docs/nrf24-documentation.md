@@ -98,7 +98,7 @@
 | 4 | CSN  | Chip Select Not            | 8        |
 | 5 | SCK  | Serial Clock (SPI)         | 13       |
 | 6 | MOSI | Master Out, Slave In (SPI) | 11       |
-| 7 | MISO | Master In, Slave Out (SPI) | 13       |
+| 7 | MISO | Master In, Slave Out (SPI) | 12       |
 | 8 | IRQ  | Interrupt                  | 7        |
 
 20. **The Hello World! example has the TX and RX address configured to a default value. What do you think would happen If a classroom full of students would start using the same address?**
