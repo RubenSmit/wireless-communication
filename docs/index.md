@@ -6,8 +6,8 @@ Documentation of all assignments for the Wireless Communication course of the IO
 
 ## Assignments
 
-All answers to the questions can be found in [/docs/nrf24-documentation.md](/docs/nrf24-documentation.md).
+All answers to the questions can be found in [nrf24-documentation.md](/nrf24-documentation).
 
 ## Project
 
-Our project proposal can be found in [/docs/proposal.md](/docs/proposal.md) and the final documentation in [/docs/system-documentation.md](/docs/system-documentation.md).
+Our project proposal can be found in [proposal.md](/proposal) and the final documentation in [s/system-documentation.md](/system-documentation).

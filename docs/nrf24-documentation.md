@@ -1,8 +1,8 @@
 # NRF24L01+ documentation
 
-## General	questions
+## General questions
 
-1. **What is the maximum output power from the NRF24 module?**   
+1. **What is the maximum output power from the NRF24 module?**
 	- 0 dBm [2]
 	1. **How does that compare to the output power of a 3G/4G mobile phone?**
 		- Between 0 and 30 dBm [1]
@@ -30,7 +30,7 @@
 	1. **What is the relationship between channels and frequencies?**
 		- F0= 2400 + RF_CH MHz you add the channel to 2400 and you get the frequency [2]
 
-7. **Which modulation technique does the radio use? Explain how this modulation technique works in your own words.**	
+7. **Which modulation technique does the radio use? Explain how this modulation technique works in your own words.**
 	- GFSK: Gaussian frequency shift keying is a modulation method for digital communication. it uses a Gaussian filter before the signal is send. FSK is the input in this system this is modulation where the frycuentcy of a signal is changed depending if the bit is a 1 or 0
  
 8. **Power consumption in the idle mode states (power-down, standby-I and standby-II). Explain in your own words what the different states do.**
@@ -104,6 +104,7 @@
     - Auto Re-Transmission. It automagically retransmits a package if the reciever did not confirm that it revieved id (did not send a ACK).
 
 ## nRF24L01+ pinout table
+
 | # | Name | Function                   | Uno pin  |
 |---|------|----------------------------|----------|
 | 1 | GND  | Ground                     | Ground   |
@@ -116,7 +117,8 @@
 | 8 | IRQ  | Interrupt                  | 7        |
 
 ## Bigger assignments
-Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples * 4000 us * 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
+
+Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples *4000 us* 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
 
 We have included the code for two of the assignments we have made in [/nrf-24-slightly-bigger-assignment](/nrf-24-slightly-bigger-assignment) for the slightly bigger assingment and [/nrf24-packet-error-rate](/nrf24-packet-error-rate) for the packet error rate assignment. Although these do not work we hope this shows our effort. We did not start with the throughput assingment yet.
 
