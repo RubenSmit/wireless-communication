@@ -10,4 +10,4 @@ All answers to the questions can be found in [nrf24-documentation.md](/nrf24-doc
 
 ## Project
 
-Our project proposal can be found in [proposal.md](/proposal) and the final documentation in [s/system-documentation.md](/system-documentation).
+Our project proposal can be found in [proposal.md](/proposal) and the final documentation in [system-documentation](/system-documentation).
