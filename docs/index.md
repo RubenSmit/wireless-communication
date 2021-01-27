@@ -10,4 +10,4 @@ All answers to the questions can be found in [nrf24-documentation](https://ruben
 
 ## Project
 
-Our project proposal can be found in [proposal](https://rubensmit.github.io/wireless-communication/wireless-communication/proposal) and the final documentation in [system-documentation](https://rubensmit.github.io/wireless-communication/system-documentation).
+Our project proposal can be found in [proposal](https://rubensmit.github.io/wireless-communication/proposal) and the final documentation in [system-documentation](https://rubensmit.github.io/wireless-communication/system-documentation).
