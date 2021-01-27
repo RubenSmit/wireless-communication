@@ -1,5 +1,4 @@
 #include <mbed.h>
-#include <stdio.h>
 #include <nRF24L01P.h>
 #include "platform/mbed_thread.h"
 
@@ -11,45 +10,41 @@ static int dataRates[] = { NRF24L01P_DATARATE_250_KBPS, NRF24L01P_DATARATE_1_MBP
 static int artDelays[] = { 250, 1000, 4000 };
 static int artRetrys[] = { 1, 2, 8, 15 };
 
-Ticker heartbeat;
+#define TRANSFER_SIZE 4
 
 void transmitter() {
   thread_sleep_for(5000);
-
-  nrf24.setTransmitMode();
-  nrf24.enable();
-  nrf24.enableAutoAcknowledge();
 
   printf( "TRANSMITTER\r\n" );
   printf( "Frequency;OutputPower;Datarate;ArtDelay;ArtRetry;PacketsSent;Run\r\n");
 
   char run = 0;
 
-  for (int op = 0; op < (sizeof(outputPowers)/sizeof(*outputPowers)); op++) {
+  for (int op = 0; op < (int) (sizeof(outputPowers)/sizeof(*outputPowers)); op++) {
     int outputPower = outputPowers[op];
 
-    for (int dr = 0; dr < (sizeof(dataRates)/sizeof(*dataRates)); dr++) {
-      int dataRate = dataRates[dr];
+    for (int ad = 0; ad < (int) (sizeof(artDelays)/sizeof(*artDelays)); ad++) {
+      int artDelay = artDelays[ad];
 
-      for (int ad = 0; ad < (sizeof(artDelays)/sizeof(*artDelays)); ad++) {
-        int artDelay = artDelays[ad];
+      for (int ar = 0; ar < (int) (sizeof(artRetrys)/sizeof(*artRetrys)); ar++) {
+        int artRetry = artRetrys[ar];
 
-        for (int ar = 0; ar < (sizeof(artRetrys)/sizeof(*artRetrys)); ar++) {
-          int artRetry = artRetrys[ar];
+        nrf24.setRfOutputPower(outputPower);
+        nrf24.enableAutoRetransmit(artDelay, artRetry);
+        nrf24.setTransmitMode();
+        nrf24.enable();
 
-          nrf24.setRfOutputPower(outputPower);
-          nrf24.enableAutoRetransmit(artDelay, artRetry);
+        printf( "%d;%d;%d;%d;%d;%d;%d\r\n", frequencies[FREQUENCY], outputPower, dataRates[DATARATE], artDelay, artRetry, SAMPLES, (int) run);
 
-          printf( "%d;%d;%d;%d;%d;%d;%d\r\n", frequencies[FREQUENCY], outputPower, dataRates[DATARATE], artDelay, artRetry, SAMPLES, (int) run);
-
-          for (int i = 0; i < SAMPLES; i++) {
-            nrf24.write(NRF24L01P_PIPE_P0, &run, sizeof(run));
-          }
-
-          run++;
-
-          thread_sleep_for(100);
+        char data[] = "data";
+        for (int i = 0; i < SAMPLES; i++) {
+          int written = nrf24.write(NRF24L01P_PIPE_P0, data, sizeof(data));
+          if (written != sizeof(data)) printf("hmm, dit is raar, het was %d\r\n", written);
         }
+
+        run++;
+
+        thread_sleep_for(100);
       }
     }
   }
@@ -62,7 +57,6 @@ void reciever() {
 
   nrf24.setReceiveMode();
   nrf24.enable();
-  nrf24.enableAutoAcknowledge();
 
   printf( "RECIEVER\r\n" );
   printf( "Frequency    : %d MHz\r\n",  nrf24.getRfFrequency() );
@@ -74,7 +68,7 @@ void reciever() {
 
   while(1) {
     if ( nrf24.readable() ) {
-      printf( "readable!\r\n" );
+      printf("Readable!\r\n");
       recieveCount = nrf24.read(NRF24L01P_PIPE_P0, recieveData, sizeof(recieveData));
 
       if (recieveCount == 1 && currentRun == recieveData[0]) {
@@ -96,6 +90,7 @@ int main() {
   nrf24.powerUp();
   nrf24.setRfFrequency(frequencies[FREQUENCY]);
   nrf24.setAirDataRate(dataRates[DATARATE]);
+  nrf24.setTransferSize( TRANSFER_SIZE );
 
   #ifdef TRANSMITTER
   transmitter();
