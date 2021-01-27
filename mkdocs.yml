@@ -1,11 +1,11 @@
 # Project information
-site_name: Wireless communication 
+site_name: Wireless communications
 
-site_description: 'wet en regelgeving van tedeapolis roleplay'
+site_description: 'Documentation of wireless communications'
 site_author: 'Willem Dekker, Ruben Smit'
 
 # Copyright
-copyright: Copyright &copy; 2020 - 2021 Tedeapolis
+copyright: Copyright &copy; 2021 Ruben Smit, Willem Dekker
 
 # Congiguration
 theme:
