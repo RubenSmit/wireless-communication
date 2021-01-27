@@ -113,6 +113,15 @@
 23. **Find in the datasheet what ‘ART’ stands for and explain this in your own words.**
     - Auto Re-Transmission. It automagically retransmits a package if the reciever did not confirm that it revieved id (did not send a ACK).
 
+
+## Bigger assignments
+Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples * 4000 us * 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
+
+We have included the code for two of the assignments we have made in [/nrf-24-slightly-bigger-assignment](/nrf-24-slightly-bigger-assignment) and [/nrf24-packet-error-rate](/nrf24-packet-error-rate). Although these do not work we hope this shows our effort.
+
+The construction of the devices:
+![Nucleos-with-nrf24.jpg](Nucleos-with-nrf24.jpg)
+
 [1]: https://oem.bmj.com/content/61/9/769
 [2]: https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf
 [3]: https://en.wikipedia.org/wiki/List_of_WLAN_channels#2.4_GHz_(802.11b/g/n/ax)
