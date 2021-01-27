@@ -89,17 +89,7 @@
         - What software is available for this module / shield: Arduino library
 
 19. Add a table to you report that describes the name and the function of every NRF24 pin. Include to which pin of the Arduino Uno header the NRF24 pin is connected.
-
-| # | Name | Function                   | Uno pin  |
-|---|------|----------------------------|----------|
-| 1 | GND  | Ground                     | Ground   |
-| 2 | VCC  | Voltage source             | 3.3 volt |
-| 3 | CE   | Chip Enable                | 9        |
-| 4 | CSN  | Chip Select Not            | 8        |
-| 5 | SCK  | Serial Clock (SPI)         | 13       |
-| 6 | MOSI | Master Out, Slave In (SPI) | 11       |
-| 7 | MISO | Master In, Slave Out (SPI) | 12       |
-| 8 | IRQ  | Interrupt                  | 7        |
+	- See [nRF24L01+ pinout table](#nRF24L01+-pinout-table)
 
 20. **The Hello World! example has the TX and RX address configured to a default value. What do you think would happen If a classroom full of students would start using the same address?**
     - Huilen. Due to interference most messages will not be transmitted properly.
@@ -113,6 +103,17 @@
 23. **Find in the datasheet what ‘ART’ stands for and explain this in your own words.**
     - Auto Re-Transmission. It automagically retransmits a package if the reciever did not confirm that it revieved id (did not send a ACK).
 
+## nRF24L01+ pinout table
+| # | Name | Function                   | Uno pin  |
+|---|------|----------------------------|----------|
+| 1 | GND  | Ground                     | Ground   |
+| 2 | VCC  | Voltage source             | 3.3 volt |
+| 3 | CE   | Chip Enable                | 9        |
+| 4 | CSN  | Chip Select Not            | 8        |
+| 5 | SCK  | Serial Clock (SPI)         | 13       |
+| 6 | MOSI | Master Out, Slave In (SPI) | 11       |
+| 7 | MISO | Master In, Slave Out (SPI) | 12       |
+| 8 | IRQ  | Interrupt                  | 7        |
 
 ## Bigger assignments
 Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples * 4000 us * 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
