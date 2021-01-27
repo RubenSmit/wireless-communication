@@ -1,0 +1,20 @@
+# Project information
+site_name: Wireless communication 
+
+site_description: 'wet en regelgeving van tedeapolis roleplay'
+site_author: 'Willem Dekker, Ruben Smit'
+
+# Copyright
+copyright: Copyright &copy; 2020 - 2021 Tedeapolis
+
+# Congiguration
+theme:
+  name: material
+  features:
+    - navigation.tabs
+  palette:
+    scheme: preference
+  language: nl
+plugins:
+  - search:
+      lang: nl
