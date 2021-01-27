@@ -1,6 +1,8 @@
-# wireless communication
+# Wireless Communication
 
-Willem Dekker & Ruben Smit
+**Willem Dekker & Ruben Smit**
+
+Documentation of all assignments for the Wireless Communication course of the IOT specialization for HBO-ICT Software Engineering.
 
 ## Assignments
 

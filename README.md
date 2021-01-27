@@ -1,4 +1,4 @@
-# wireless-communication
+# Wireless Communication
 Willem Dekker & Ruben Smit
 
 ## Assignments
