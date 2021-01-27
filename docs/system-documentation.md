@@ -10,5 +10,12 @@ The system consists of 3 devices.
 ## FiPy connections
 ![fipy-with-servo.jpg](fipy-with-servo.jpg)
 
-## App demo
+## Demos
+### Full app demo
 [app-demo.mp4](app-demo.mp4)
+
+### Fipy with phone demo
+[fipy-with-phone-demo.mp4](fipy-with-phone-demo.mp4)
+
+### NRF52 with phone demo
+[NRF52-with-phone-demo.mp4](NRF52-with-phone-demo.mp4)
