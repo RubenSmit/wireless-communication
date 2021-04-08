@@ -275,8 +275,72 @@ fab.setOnClickListener(new View.OnClickListener() {
 In it the Bluetooth manager and adapter are initialized. We ensure bluetooth is enabled and permission is given to use the bluetooth services. Next the List Adapter is initialized for displaying the list of connected peripherals. A listner is created for the floating action button that, when the button is pressed, starts scanning for bluetooth devices.
 
 ```java
+private void scanLeDevice() {
+    Log.i(TAG, "Started scanning for devices");
+    BluetoothDevicesProvider.clear();
+    if (!mScanning) {
+        // Stops scanning after a pre-defined scan period.
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScanning = false;
+                bluetoothLeScanner.stopScan(leScanCallback);
+                Log.i(TAG, "Stopped scanning for devices");
+            }
+        }, SCAN_PERIOD);
 
+        // Scan for devices matching the filter and use the callback for found devices
+        mScanning = true;
+        List<ScanFilter> filters = deviceFilters();
+        ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
+        bluetoothLeScanner.startScan(filters, settings, leScanCallback);
+    } else {
+        // Stop scanning if the button is pressed again
+        mScanning = false;
+        bluetoothLeScanner.stopScan(leScanCallback);
+        Log.i(TAG, "Stopped scanning for devices");
+    }
+}
 ```
+
+When the scanning is started a delayed handler is created that will stop the scanning after a predefined period. A filter is applied to the scanner to only return NRF52 and FiPy devices. Also a callback is defined to handle any found devices.
+
+```java
+private ScanCallback leScanCallback =
+        new ScanCallback() {
+            @Override
+            public void onScanResult(int callbackType, ScanResult result) {
+                // Get the bluetooth device
+                Log.i(TAG, "Found a bluetooth device!");
+                super.onScanResult(callbackType, result);
+                BluetoothDevice bluetoothDevice = result.getDevice();
+
+                if (!BluetoothDevicesProvider.contains(bluetoothDevice.getAddress())) {
+                    // Add the device to the list and observe it
+                    Log.i(TAG, "Adding new device to list");
+                    Device device = new Device(bluetoothDevice, getContext());
+                    BluetoothDevicesProvider.addDevice(device);
+                    device.addObserver(getObserver());
+                }
+            }
+        };
+```
+
+The scan callback creates a Device model for each found device and adds it to the Bluetooth Devices Provider. Also the Main Activity is adde as a observer to the Device model.
+
+```java
+public void update(Observable observable, Object o) {
+    runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            int index = BluetoothDevicesProvider.deviceList.indexOf((Device) observable);
+            bluetoothDevicesListAdapter.notifyItemChanged(index);
+        }
+    });
+}
+```
+
+When there are changes to a Device model the Main Activity, as observer, is notified. Consequently it will start a runner on the UI thread to notify the List Adapter about changes to the item.
 
 #### Device Model
 
