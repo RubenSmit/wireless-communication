@@ -469,7 +469,73 @@ public static void clear() {
 When the list with devices must be cleared each device is disconnected and the lists are cleared. The adapter is notified of the changes to the list.
 
 #### Bluetooth Devices List Adapter
+The list adapter displays a list containing three kinds of devices:
 
+- Unknown devices where the service type is not yet determined.
+- Sensor devices with a Human Interface Device service.
+- Servo devices with a Automation IO service.
+
+Each device type has its own view and view binder. In the `onCreateViewHolder` and `onBindViewHolder` functions the correct view and binder are determined.
+
+```java
+public int getItemViewType(int position) {
+    Device device = BluetoothDevicesProvider.deviceList.get(position);
+
+    if(device.getDeviceType() == SENSOR){
+        return SENSOR;
+    } else if (device.getDeviceType() == SERVO) {
+        return SERVO;
+    } else {
+        return UNKNOWN;
+    }
+}
+```
+
+The view type is determined for the current list position by getting the device from the devices provider ant matching the type.
+
+##### Servo View
+The servo view contains a seekbar to change the angle of the servo and a dropdown to select the source of the angle.
+
+```java
+holder.sbAngle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        if (!device.usesSource()) {
+            device.writeAngle(seekBar.getProgress(), false);
+            holder.tvAngle.setText(String.valueOf(seekBar.getProgress()));
+        }
+    }
+```
+
+The `OnSeekBarChangeListener` writes a new angle to the device when the position of the seekbar is changed.
+
+```java
+List<Device> sources = new ArrayList<>();
+sources.add(device);
+for (Device sourceDevice: BluetoothDevicesProvider.deviceList) {
+    if (!sourceDevice.equals(device) && sourceDevice.getDeviceType() == SENSOR) {
+        sources.add(sourceDevice);
+    }
+}
+ArrayAdapter<Device> spinnerAdapter = new ArrayAdapter(context, R.layout.source_list_item, R.id.tvSourceName, sources.toArray());
+holder.spSource.setAdapter(spinnerAdapter);
+if (device.usesSource()) {
+    holder.spSource.setSelection(sources.indexOf(device.getSource()));
+}
+
+holder.spSource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Device source = sources.get(i);
+        if (source.equals(device)) {
+            device.unsetSource();
+        } else {
+            device.setSource(source);
+        }
+    }
+```
+
+A list of available sources is created by getting all devices from the device provider and filtering them on device type. For each available source a dropdown item is created. The currently used source is pre-selected in the dropdown. When a item in the dropdown is selected the `OnItemSelectedListener` handles the event and sets the new source for the servo device.
 
 ## Demonstrations and tests
 TODO

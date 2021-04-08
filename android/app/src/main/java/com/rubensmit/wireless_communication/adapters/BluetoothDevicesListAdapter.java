@@ -57,7 +57,7 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Inflate the correct view if locked or not
+        //Inflate the correct view
         switch (viewType) {
             case SENSOR :
                 View sensorView = LayoutInflater.from(context).inflate(R.layout.devices_list_item_sensor, parent,  false);
@@ -81,7 +81,7 @@ public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
      */
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //Bind the correct view if locked or not
+        //Bind the correct view
         switch (holder.getItemViewType()) {
             case SENSOR :
                 bindSensorView((SensorViewHolder) holder, devicesList.get(position));
