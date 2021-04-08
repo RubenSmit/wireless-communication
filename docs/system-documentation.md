@@ -33,8 +33,8 @@ Both peripheral types expose a BLE service with a characteristic, the Android ph
 This service was chosen because the NRF52 acts like a special kind of HID (Human Interface Device). It takes human input and makes it available to connected devices.
 - **Characteristic: Plane angle (0x2763)**
 This characteristic was chosen because we are looking for the plane angle to set the servo to. And we read the angle (resistance) of the potentiometer to get it. The angle is sent in degrees.
-  - **Read** The current angle of the potentiometer can be read.
-  - **Notify** When the angle of the potentiometer changes connected devices can be notified.
+    - **Read** The current angle of the potentiometer can be read.
+    - **Notify** When the angle of the potentiometer changes connected devices can be notified.
 
 ### FiPy
 
@@ -42,8 +42,8 @@ This characteristic was chosen because we are looking for the plane angle to set
 This service was chosen because we are altering the IO of the fipy.
 - **Characteristic: Plane angle (0x2763)**
 This was chosen because we are setting the plane angle of the servo. The angle is send and set in degrees.
-  - **Read** The current angle of the servo can be read.
-  - **Write** The angle of the servo can be changed by writing a new value.
+    - **Read** The current angle of the servo can be read.
+    - **Write** The angle of the servo can be changed by writing a new value.
 
 ### Android phone
 
