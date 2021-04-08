@@ -108,7 +108,133 @@ To use the system follow the following steps:
 For each connected NRF52 a bar is shown displaying the current angle of the potentiometer. When the potentiometer is turned this bar is updated. Every connected FyPi is also shown in the list. It is possibe to set the angle of the FyPi using the slider. Using the source dropdown it is possible to connect the angle of the servo to the angle of a potentiometer. When the potentiometer is turned the angle of the servo will be matched.
 
 ## Code
-TODO
+For every device a program has been written to enable the communication between the various components, connect the sensors and actuators and to display their status on the dashboard. Next we will explain how the code for each device works.
+
+### NRF52
+The code for the NRF52 consists of a main function and a Human Interface Device service class and can be found in [/nrf52/src/main.cpp](https://github.com/RubenSmit/wireless-communication/tree/main/nrf52/src/main.cpp).
+
+#### Main function
+On boot the main function is called. This function starts all services and is shown below.
+```c++
+int main() {
+    BLE &ble_interface = BLE::Instance();
+    events::EventQueue event_queue;
+    HidService hid_service;
+    BLEProcess ble_process(event_queue, ble_interface);
+ 
+    ble_process.on_init(callback(&hid_service, &HidService::start));
+ 
+    // bind the event queue to the ble interface, initialize the interface
+    // and start advertising
+    ble_process.start();
+ 
+    // Process the event queue.
+    event_queue.dispatch_forever();
+ 
+    return 0;
+}
+```
+First a instance of the ble interface and a event queue is created. Next a instance of the human interface device (HID) service is created. A bluetooth low energy process is created and the event queue and bluetooth interface are attached to it. When the bluetooth process is initiated the HID service is started. We start advertising and continue processing the event queue as long as the application is running.
+
+#### Human Interface Device Service
+The Human Interface Device Service manages the HID service and the angle characteristic for the GATT server.
+
+```c++
+void start(BLE &ble_interface, events::EventQueue &event_queue)
+{
+      if (_event_queue) {
+        return;
+    }
+
+    _server = &ble_interface.gattServer();
+    _event_queue = &event_queue;
+
+    // register the service
+    printf("Adding service\r\n");
+    ble_error_t err = _server->addService(_hid_service);
+
+    if (err) {
+        printf("Error %u during service registration.\r\n", err);
+        return;
+    }
+
+    // read write handler
+    _server->onDataSent(as_cb(&Self::when_data_sent));
+    _server->onDataRead(as_cb(&Self::when_data_read));
+
+    // updates subscribtion handlers
+    _server->onUpdatesEnabled(as_cb(&Self::when_update_enabled));
+    _server->onUpdatesDisabled(as_cb(&Self::when_update_disabled));
+
+    // print the handles
+    printf("human interface device service registered\r\n");
+    printf("service handle: %u\r\n", _hid_service.getHandle());
+    printf("\angle characteristic value handle %u\r\n", _angle_char.getValueHandle());
+
+    _event_queue->call_every(1000 /* ms */, callback(this, &Self::read_angle));
+    _event_queue->call_every(1000 /* ms */, callback(this, &Self::blink_led));
+}
+```
+
+When the service is started it registers the hid service to the GATT server. Next it registers the handlers for sending and reading data and enabling and disabling of updates. Two events are added to the event queue to be run every second, reading the angle of the potentiometer and blinking the heartbeat led.
+
+```c++
+void read_angle(void)
+{
+    uint8_t angle = (uint8_t) map(_angle_sensor.read(), 0, 1, 0, 180);
+    printf("read angle as %i\r\n", angle);
+
+    ble_error_t err = _angle_char.set(*_server, angle);
+    if (err) {
+        printf("write of the angle value returned error %u\r\n", err);
+        return;
+    }
+}
+```
+
+After reading the angle it is mapped to a value of 0 to 180 degrees. Then the angle characteristic is updated with the new angle and any subscribers are notified.
+
+### FiPy
+The code for the FiPy can be found in [/fipy/src/main.cpp](https://github.com/RubenSmit/wireless-communication/tree/main/fipy/src/main.cpp).
+
+```python
+bluetooth = Bluetooth() # Get a bluetooth instance
+bluetooth.set_advertisement(name='FyPi') # Set the name
+bluetooth.callback(trigger=Bluetooth.CLIENT_CONNECTED | Bluetooth.CLIENT_DISCONNECTED, handler=conn_cb) # set up the callbacks for connect and disconnect events
+bluetooth.advertise(True) # advertise the device
+```
+
+When the FiPy is booted a bluetooth instance is created and prepared for advertisement and started. Also connection and disconnection callbacks are added.
+
+```python
+srv1 = bluetooth.service(uuid=0x1815 , isprimary=True) # set up the service to display the current angle of the servo
+chr1 = srv1.characteristic(uuid=0x2763 , value=currentAngle) # set up the characteristic to get the server angle 
+char1_cb = chr1.callback(trigger=Bluetooth.CHAR_WRITE_EVENT, handler=char1_cb_handler) # set up the callback when writen to characteristic
+```
+
+Next the Automation IO service is created and a angle characteristic is added to the service. A callback is created to handle write events to the angle characteristic.
+
+```python
+pwm = PWM(0, frequency=50) # make a pwm provider
+servo = pwm.channel(0, pin='P23', duty_cycle=0.0) # Setup the pwm for the servo
+setServoPwn(currentAngle) # Set the servo the the initial angle
+```
+
+Finally a Pulse With Modulation (PWM) provider is created with a channel to control the servo. The correct pwm value is determined for the current angle and the servo is moved to the initial angle.
+
+```python
+def char1_cb_handler(chr, data): 
+    events, value = data # store the events and data
+    if  events & Bluetooth.CHAR_WRITE_EVENT: # if the event was a write event
+        currentAngle = int.from_bytes(value, "big") # get the value from the payload
+        setServoPwn(currentAngle) # set the servo to the right position
+        chr1.value(currentAngle) # update the value that is displayed over Bluetooth
+        print("Set new angle: ", currentAngle)
+```
+When a write event occurs for the angle characteristic it is handled by the event handler. The new angle is read from the payload and stored. A new pwm value for the servo is calculated and the servo is moved to the right position. Finally the characteristic is updated with the new angle value.
+
+### Android
+
 
 ## Demonstrations and tests
 TODO
