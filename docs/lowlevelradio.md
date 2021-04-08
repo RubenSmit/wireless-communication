@@ -32,7 +32,7 @@ a packet containing 0x010003 would be go to next pin current pin is 3.
 
 ### communication beween the boards
 
-![](packet-flow-led-app.png)
+![](img/packet-flow-led-app.png)
 
 The boards would send a package
 described above to the other board and increment or decrement the pointer value

@@ -67,6 +67,9 @@ plugins:
         #debug_html: true
         #show_anchors: true
         #verbose: true
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
 nav:
   - Home : index.md
   - NRF24L01+ documentation: nrf24-documentation.md\

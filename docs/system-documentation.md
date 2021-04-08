@@ -18,7 +18,7 @@ On the android phone a appplication will run that displays a dashboard. It will 
 
 ## Services and Characteristics
 Both peripheral types expose a BLE service with a characteristic, the Android phone connects to these peripherals and uses these services and characteristics. A description will be given of the services and characteristics available from each peripheral and whether you can read, write or be notified for each characteristic. A overview of the different services and characteristics and how they are used is shown in the figure below.
-![ble-services-and-characteristics.png](ble-services-and-characteristics.png)
+![ble-services-and-characteristics.png](img/ble-services-and-characteristics.png)
 
 ### NRF52
 - **Service: Human Interface Device (0x1812)**
@@ -61,7 +61,7 @@ Connect the potentiometer to the NRF50 according to the following schematic. In 
 | A0        | Wiper (P2)        |
 | GND       | Fixed end (P3)    |
 
-![NRF52-with-potentiometer.jpg](NRF52-with-potentiometer.jpg)
+![NRF52-with-potentiometer.jpg](img/NRF52-with-potentiometer.jpg)
 
 #### Uploading the code
 Upload the code found in [/nrf52](https://github.com/RubenSmit/wireless-communication/tree/main/nrf52) to the NRF52 using Visual Studio Code with the PlatformIO plugin.
@@ -87,7 +87,7 @@ Connect the servo to the FiPy and the power supply on the breadboard according t
 | P23      | Signal    |                                  |
 | GND      | GND       | Negative                         |
 
-![fipy-with-servo.jpg](fipy-with-servo.jpg)
+![fipy-with-servo.jpg](img/fipy-with-servo.jpg)
 
 #### Uploading the code
 Upload the code found in [/fipy](https://github.com/RubenSmit/wireless-communication/tree/main/fipy) to the FiPy using Visual Studio Code with the Pycom plugin.
@@ -103,7 +103,7 @@ To use the system follow the following steps:
 3. Press the big bluetooth button in the bottom right corner. The android device will now find and connect to all available peripherals. Please grant access to bluetooth and location services if requested.
 4. A list of available peripherals and their status is shown once they are connected as can be seen in the image below.
 
-![app-interface.png](app-interface.png)
+![app-interface.png](img/app-interface.png)
 
 For each connected NRF52 a bar is shown displaying the current angle of the potentiometer. When the potentiometer is turned this bar is updated. Every connected FyPi is also shown in the list. It is possibe to set the angle of the FyPi using the slider. Using the source dropdown it is possible to connect the angle of the servo to the angle of a potentiometer. When the potentiometer is turned the angle of the servo will be matched.
 
@@ -343,6 +343,7 @@ public void update(Observable observable, Object o) {
 When there are changes to a Device model the Main Activity, as observer, is notified. Consequently it will start a runner on the UI thread to notify the List Adapter about changes to the item.
 
 #### Device Model
+
 ```java
 public Device(BluetoothDevice bluetoothDevice, Context context) {
     this.device = bluetoothDevice;
@@ -558,6 +559,6 @@ It was possible to link the angle of the servo to the angle of the potentiometer
 ## Demonstrations
 The following video's demonstrate the working system in several ways:
 
-- **Full app demonstration** [app-demo.mp4](app-demo.mp4) displaying connecting sensors and servo's, displaying changes in angle of the sensor, changing the angle of the servo and linking the angle of the sensor to the servo.
-- **Fipy with phone demonstration** [fipy-with-phone-demo.mp4](fipy-with-phone-demo.mp4) displaying controlling the angle of the servo using the app.
-- **NRF52 with phone demonstration** [NRF52-with-phone-demo.mp4](NRF52-with-phone-demo.mp4) displaying changing the angle of the potentiometer and displaying the changes in the app.
+- **Full app demonstration** [app-demo.mp4](mp4/app-demo.mp4) displaying connecting sensors and servo's, displaying changes in angle of the sensor, changing the angle of the servo and linking the angle of the sensor to the servo.
+- **Fipy with phone demonstration** [fipy-with-phone-demo.mp4](mp4/fipy-with-phone-demo.mp4) displaying controlling the angle of the servo using the app.
+- **NRF52 with phone demonstration** [NRF52-with-phone-demo.mp4](mp4/NRF52-with-phone-demo.mp4) displaying changing the angle of the potentiometer and displaying the changes in the app.
