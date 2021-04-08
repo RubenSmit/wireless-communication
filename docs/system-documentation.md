@@ -25,16 +25,16 @@ Both peripheral types expose a BLE service with a characteristic, the Android ph
 This service was chosen because the NRF52 acts like a special kind of HID (Human Interface Device). It takes human input and makes it available to connected devices. 
 - **Characteristic: Plane angle (0x2763)**
 This characteristic was chosen because we are looking for the plane angle to set the servo to. And we read the angle (resistance) of the potentiometer to get it. The angle is sent in degrees.
-  + **Read** The current angle of the potentiometer can be read.
-  + **Notify** When the angle of the potentiometer changes connected devices can be notified.
+    + **Read** The current angle of the potentiometer can be read.
+    + **Notify** When the angle of the potentiometer changes connected devices can be notified.
 
 ### FiPy
 - **Service: Automation IO (0x1815)**
 This service was chosen because we are altering the IO of the fipy.
 - **Characteristic: Plane angle (0x2763)**
 This was chosen because we are setting the plane angle of the servo. The angle is send and set in degrees.
-  + **Read** The current angle of the servo can be read.
-  + **Write** The angle of the servo can be changed by writing a new value.
+    + **Read** The current angle of the servo can be read.
+    + **Write** The angle of the servo can be changed by writing a new value.
 
 ### Android phone
 The Android phone does not expose any services and characteristics. It does however read the angle of connected NRF52 peripherals and subscribes to notifications in changes to this angle. It also reads the angles of connected FiPy peripherals and writes a new angle if needed.
@@ -47,12 +47,14 @@ Follow the following steps to prepare the NRF52 with the attached potentiometer 
 
 #### Bill of materials
 The following materials are needed:
+
 - Nordic-nRF52-DK
 - 10K Ohm potentiometer
 - 3 Jumper wires male-female
 
 #### Connecting the materials
 Connect the potentiometer to the NRF50 according to the following schematic. In the image below a example is shown of how these are connected.
+
 | NRF52 pin | Potentiometer pin |
 |-----------|-------------------|
 | VDD       | Fixed end (P1)    |
@@ -69,6 +71,7 @@ Follwo the following steps to prepare the FiPy with the attached servo to be use
 
 #### Bill of materials
 The following materials are needed:
+
 - FiPy with Expansion board
 - Servo motor
 - 5V 500mA External power supply
@@ -77,6 +80,7 @@ The following materials are needed:
 
 #### Connecting the materials
 Connect the servo to the FiPy and the power supply on the breadboard according to the following schematic. In the image below a example is shown of how these are connected.
+
 | FiPy pin | Servo pin | External power supply (5V 500mA) |
 |----------|-----------|----------------------------------|
 |          | 5v        | Positive                         |
