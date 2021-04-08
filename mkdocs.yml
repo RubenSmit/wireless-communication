@@ -73,8 +73,9 @@ markdown_extensions:
 nav:
   - Introduction : index.md
   - High level Radio: system-documentation.md
-  - Low level Radio theory: nrf24-documentation.md
-  - LED app: lowlevelradio.md
-  - PER app: per-app.md
-  - Throughput test app: throughput-test-app.md
+  - Low level radio:
+    - Low level Radio theory: general-questions.md
+    - LED app: led-app.md
+    - PER app: per-app.md
+    - Throughput test app: throughput-test-app.md
   - Research: research.md
