@@ -32,10 +32,14 @@ Due to problems with using the NRF24L01+ on a Nucleo we where unable to complete
 
 Due to a lack of results we can not give a conclusion.
 
-### 1. How long does it take to transmit 10.000 32-bit numbers (320.000 bits in total) from a transmitter to a reciever for a set data rate
+### How long does it take to transmit 10.000 32-bit numbers (320.000 bits in total) from a transmitter to a reciever for a set data rate
 
-### 2. What is the actual data rate when transmitting 320.000 bits and how much does it differ from the set data rate
+We where unable to answer this question.
 
-### 3. What causes the difference between the actual and set data rate
+### What is the actual data rate when transmitting 320.000 bits and how much does it differ from the set data rate
+
+We where unable to answer this question.
+
+### What causes the difference between the actual and set data rate
 
 Although we do not have results one of the reasons that the set data rate is not reached is the auto acknowledge communication. This adds a overhead to the communication and limits the actual data rate.

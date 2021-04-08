@@ -22,7 +22,7 @@ One of the Nucleos will act as the transmitter, the other as the reciever. They 
 
 ## Results
 
-Unfortunately we did not succeed in getting the nrf24l01+ running with a Nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us to achieve. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples times 4000 us times 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong. Therefore we where unable to collect any results. In the folder [/nrf24-packet-error-rate](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-packet-error-rate/PacketErrorRAte) a preliminary setup for the app can be found. This is a work-in-progress application and not near the final solution.
+Unfortunately we did not succeed in getting the nrf24l01+ running with a Nucleo. Therefore we where unable to collect any results. In the folder [/nrf24-packet-error-rate](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-packet-error-rate/PacketErrorRAte) a preliminary setup for the app can be found. This is a work-in-progress application and not near the final solution.
 
 ## Conclusion
 
