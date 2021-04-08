@@ -195,7 +195,7 @@ void read_angle(void)
 After reading the angle it is mapped to a value of 0 to 180 degrees. Then the angle characteristic is updated with the new angle and any subscribers are notified.
 
 ### FiPy
-The code for the FiPy can be found in [/fipy/src/main.cpp](https://github.com/RubenSmit/wireless-communication/tree/main/fipy/src/main.cpp).
+The code for the FiPy can be found in [/fipy/main.py](https://github.com/RubenSmit/wireless-communication/tree/main/fipy/main.py).
 
 ```python
 bluetooth = Bluetooth() # Get a bluetooth instance
