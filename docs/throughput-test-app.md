@@ -1,16 +1,41 @@
 # Throughput test app
 
+This chapter describes the research preformed for the Throughput test app assignment.
+
 ## Introduction
+
+For the NRF24L01+ a data rate can be configured. This is the amount of data that will be transmitted in a period of time. In practice this data rate is not reached. This research tries to determine the actual data rate of the NRF24L01+. Firstly the problem and research question is defined. Secondly the methodology used to answer the research question is described. Thirdly the results of the research is presented. Finally a conclusion and answer to the research question is given.
 
 ## Problem definition
 
+The actual data rate of the NRF24L01+ does not precicely match the data rate set in the settings. It is unknow what the actual datarate is and therfore unknown how long it takes to transmit a large amount of data. Therefore the following research questions are determined:
+
+1. How long does it take to transmit 10.000 32-bit numbers (320.000 bits in total) from a transmitter to a reciever for a set data rate.
+2. What is the actual data rate when transmitting 320.000 bits and how much does it differ from the set data rate.
+3. What causes the difference between the actual and set data rate.
+
+During the tests all numbers must be recieved by the reciever.
+
 ## Methodology
 
-[/nrf24-throughput](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-throughput)
+Two Nucleos will be exquipped with a NRF24L01+, one using the IoT shield and one using a breakout board. Both Nucleos will be connected to a computer using USB cables. A example of this setup is shown in the image below.
+
 ![Nucleos-with-nrf24.jpg](img/Nucleos-with-nrf24.jpg)
+
+One of the Nucleos will act as the transmitter, the other as the reciever. The transmitter will transmit the 10.000 32-bit numbers to the reciever. The reciever will acknowledge if the packet has been recieved using auto acknowledge. The transmitter will record the total time it takes to transmit all numbers as well as the total amount of retries. This will be sent to a serial monitor via the USB cable.
 
 ## Results
 
-Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples *4000 us* 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
+Due to problems with using the NRF24L01+ on a Nucleo we where unable to complete this assignment and get any results.
 
 ## Conclusion
+
+Due to a lack of results we can not give a conclusion.
+
+### 1. How long does it take to transmit 10.000 32-bit numbers (320.000 bits in total) from a transmitter to a reciever for a set data rate
+
+### 2. What is the actual data rate when transmitting 320.000 bits and how much does it differ from the set data rate
+
+### 3. What causes the difference between the actual and set data rate
+
+Although we do not have results one of the reasons that the set data rate is not reached is the auto acknowledge communication. This adds a overhead to the communication and limits the actual data rate.
