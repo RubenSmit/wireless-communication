@@ -71,7 +71,10 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
 nav:
-  - Home : index.md
-  - NRF24L01+ documentation: nrf24-documentation.md
+  - Introduction : index.md
   - High level Radio: system-documentation.md
+  - Low level Radio theory: nrf24-documentation.md
   - LED app: lowlevelradio.md
+  - PER app: per-app.md
+  - Throughput test app: throughput-test-app.md
+  - Research: research.md
