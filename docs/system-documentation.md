@@ -343,6 +343,95 @@ public void update(Observable observable, Object o) {
 When there are changes to a Device model the Main Activity, as observer, is notified. Consequently it will start a runner on the UI thread to notify the List Adapter about changes to the item.
 
 #### Device Model
+```java
+public Device(BluetoothDevice bluetoothDevice, Context context) {
+    this.device = bluetoothDevice;
+    this.context = context;
+
+    Log.i(TAG, "Attempt connecting to gatt service.");
+    bluetoothGatt = device.connectGatt(context, false, gattCallback);
+}
+```
+
+When created the Device model stores the bluetooth device and attempts to connect to the gatt service of the device. The gatt callback handles the events that emanate from the gatt service. The following events are handled:
+
+- **onConnectionStateChange** When the connection state is changed is is stored and all observers are notified and a attempt is made to discover the services.
+- **onServicesDiscovered** When services are discovered a attempt is made to determine the service type.
+- **onCharacteristicChanged** When a notification is recieved that a characteristich has changed a attempt is made to read the characteristic.
+- **onCharacteristicRead** When the angle characteristic is read the format of the data is determined and the angle is stored.
+- **onCharacteristicWrite** When a characteristic is successfully written this is logged.
+
+```java
+private void setServiceType(BluetoothGatt gatt) {
+    for (BluetoothGattService service: gatt.getServices()) {
+        UUID uuid = service.getUuid();
+        Log.i(TAG, "Found service: " + uuid + " for device: " + device.getName());
+        if (uuid.equals(UUID_HUMAN_INTERFACE_DEVICE_SERVICE)) {
+            // If the device is a sensor, subscribe to new sensor data
+            Log.i(TAG, "This is a sensor!");
+            deviceType = TYPE_SENSOR;
+            subscribeToSensorData(service);
+        } else if (uuid.equals(UUID_GENERIC_ATTRIBUTE_SERVICE)) {
+            Log.i(TAG, "This is a servo!");
+            deviceType = TYPE_SERVO;
+        }
+    }
+}
+```
+
+When a service is detected it is matched against the sensor and servo service UUIDs. When a match is found the device type is stored. For sensors a attempt is made to subscribe to the sensor data.
+
+```java
+private void subscribeToSensorData(BluetoothGattService service) {
+    for (BluetoothGattCharacteristic characteristic: service.getCharacteristics()) {
+        Log.i(TAG, "Found characteristic: " + characteristic.getUuid() + " for device: " + device.getName());
+    }
+
+    BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID_PLANE_ANGLE_CHARACTERISTIC);
+    bluetoothGatt.setCharacteristicNotification(characteristic, true);
+    BluetoothGattDescriptor descriptor = characteristic.getDescriptor(CLIENT_CHARACTERISTIC_CONFIG);
+    descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+    bluetoothGatt.writeDescriptor(descriptor);
+
+    Log.i(TAG, "Subscribed to sensor characteristic: " + characteristic);
+
+    bluetoothGatt.readCharacteristic(characteristic);
+}
+```
+
+When subscribing to the sensor data the angle characteristic is retrieved and the bluetooth gatt server of the android phone is instructed to subscribe to notifications for the characteristic. Next a attempt is made to read the angle characteristic.
+
+```java
+private void setAngle(int angle) {
+    if (angle != this.angle) {
+        this.angle = angle;
+        setChanged();
+        notifyObservers();
+    }
+}
+```
+
+When a new angle is stored and it differs from the previous angle, the observers of the Device model are notified.
+
+```java
+public void writeAngle(int angle, boolean notify) {
+    if (angle != this.angle) {
+        this.angle = angle;
+        if (notify) {
+            setChanged();
+            notifyObservers();
+        }
+        Log.i(TAG, "Set angle to: " + angle);
+
+        BluetoothGattService service = bluetoothGatt.getService(UUID_GENERIC_ATTRIBUTE_SERVICE);
+        BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID_PLANE_ANGLE_CHARACTERISTIC);
+        characteristic.setValue(angle, BluetoothGattCharacteristic.FORMAT_UINT8, 0);
+        bluetoothGatt.writeCharacteristic(characteristic);
+    }
+}
+```
+
+When a new angle is written to a Device model a attempt is made to write it to the characteristic. If specified the observers of the model are notified of the change.
 
 #### Bluetooth Devices Provider
 
