@@ -123,7 +123,7 @@ Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo.
 We have included the code for two of the assignments we have made in [/nrf-24-slightly-bigger-assignment](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-slightly-bigger-assignment) for the slightly bigger assingment and [/nrf24-packet-error-rate](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-packet-error-rate/PacketErrorRAte) for the packet error rate assignment. Although these do not work we hope this shows our effort. We did not start with the throughput assingment yet.
 
 The construction of the devices:
-![Nucleos-with-nrf24.jpg](Nucleos-with-nrf24.jpg)
+![Nucleos-with-nrf24.jpg](img/Nucleos-with-nrf24.jpg)
 
 [1]: https://oem.bmj.com/content/61/9/769
 [2]: https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf
