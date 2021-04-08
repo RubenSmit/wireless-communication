@@ -21,6 +21,14 @@ import com.rubensmit.wireless_communication.providers.BluetoothDevicesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * BluetoothDevicesListAdapter
+ *
+ * List adapter for displaying a list of connected bluetooth devices
+ * Different holders are used for unknown, sensor and servo devices
+ *
+ * @author Ruben
+ */
 public class BluetoothDevicesListAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<Device> devicesList;

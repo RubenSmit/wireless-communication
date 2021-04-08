@@ -234,6 +234,55 @@ def char1_cb_handler(chr, data):
 When a write event occurs for the angle characteristic it is handled by the event handler. The new angle is read from the payload and stored. A new pwm value for the servo is calculated and the servo is moved to the right position. Finally the characteristic is updated with the new angle value.
 
 ### Android
+The android application consists of several components. First a global overview will be given of these components and their relation. Next each component will be described in detail. The components of the application are:
+
+- **Main Activity** Is started when the application boots. It initializes all other components of the application and manages the bluetooth connections and scanning.
+- **Device Model** Stores all information about and handles the communication with a single peripheral.
+- **Bluetooth Devices Provider** Stores and manages a list of all connected peripherals.
+- **Bluetooth Devices List Adapter** Handles the displaying of the list of connected peripherals.
+
+When the Main Activity is started and the bluetooth connection button is pressed the Android phone will start scanning for available peripherals. Once a peripheral is found a Device Model is created for the peripheral and stored in the Bluetooth Devices Provider.
+
+The Main Activity will supply the Bluetooth Devices List Adapter with the list of devices to be displayed. When a new device is found the Main Activity will notify the List Adapter of the change. When a property of a device changes it wil notify the Main Activity which in turn will notify the List Adapter. In this way all changes to the devices will be displayed in the list.
+
+#### Main Activity
+When the Main Activity is started the `onCreate` method is called. It contains the following code.
+
+```java
+// Initializes Bluetooth adapter.
+final BluetoothManager bluetoothManager =
+        (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+bluetoothAdapter = bluetoothManager.getAdapter();
+
+// Ensures Bluetooth is available on the device and it is enabled. If not,
+// displays a dialog requesting user permission to enable Bluetooth.
+if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+}
+
+bluetoothDevicesListAdapter = new BluetoothDevicesListAdapter(this);
+
+FloatingActionButton fab = findViewById(R.id.fab);
+fab.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        scanLeDevice();
+    }
+});
+```
+
+In it the Bluetooth manager and adapter are initialized. We ensure bluetooth is enabled and permission is given to use the bluetooth services. Next the List Adapter is initialized for displaying the list of connected peripherals. A listner is created for the floating action button that, when the button is pressed, starts scanning for bluetooth devices.
+
+```java
+
+```
+
+#### Device Model
+
+#### Bluetooth Devices Provider
+
+#### Bluetooth Devices List Adapter
 
 
 ## Demonstrations and tests

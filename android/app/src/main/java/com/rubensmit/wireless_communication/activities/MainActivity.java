@@ -46,6 +46,15 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
+/**
+ * BluetoothDevicesProvider
+ *
+ * Handles displaying of a list of connected bluetooth devices.
+ * It initiates scanning for new devices and stores the found devices in a provider.
+ * It initiates displaying of the list and notifies the list of changes to the devices.
+ *
+ * @author Ruben
+ */
 public class MainActivity extends AppCompatActivity implements Observer {
     private final static String TAG = "MAIN_ACTIVITY";
 
@@ -62,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;
 
+    /**
+     * Starts the bluetooth service, initiates the list of devices and adds a listener to the fab
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
         });
     }
 
+    /**
+     * Scans for available BLE peripherals during the scanning period
+     */
     private void scanLeDevice() {
         Log.i(TAG, "Started scanning for devices");
         BluetoothDevicesProvider.clear();
@@ -106,37 +122,56 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 }
             }, SCAN_PERIOD);
 
+            // Scan for devices matching the filter and use the callback for found devices
             mScanning = true;
-
-            List<ScanFilter> filters = new ArrayList<>();
-            ScanFilter humanInterfaceFilter = new ScanFilter.Builder()
-                    .setDeviceName("FyPi")
-                    .build();
-            filters.add(humanInterfaceFilter);
-            ScanFilter genericAttributeFilter = new ScanFilter.Builder()
-                    .setDeviceName("NRF52")
-                    .build();
-            filters.add(genericAttributeFilter);
-
+            List<ScanFilter> filters = deviceFilters();
             ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
-
             bluetoothLeScanner.startScan(filters, settings, leScanCallback);
-//            bluetoothLeScanner.startScan(leScanCallback);
         } else {
+            // Stop scanning if the button is pressed again
             mScanning = false;
             bluetoothLeScanner.stopScan(leScanCallback);
             Log.i(TAG, "Stopped scanning for devices");
         }
     }
 
+    /**
+     * Provides the filters used to limit the scan results to the wanted peripherals
+     * @return device filters
+     */
+    private List<ScanFilter> deviceFilters() {
+        List<ScanFilter> filters = new ArrayList<>();
+
+        // Filter for FyPi
+        ScanFilter humanInterfaceFilter = new ScanFilter.Builder()
+                .setDeviceName("FyPi")
+                .build();
+        filters.add(humanInterfaceFilter);
+
+        // Filter for NRF52
+        ScanFilter genericAttributeFilter = new ScanFilter.Builder()
+                .setDeviceName("NRF52")
+                .build();
+        filters.add(genericAttributeFilter);
+
+        return filters;
+    }
+
+    /**
+     * Initiates a connection with found peripherals, creates a device model and adds it to the
+     * provider
+     */
     private ScanCallback leScanCallback =
             new ScanCallback() {
                 @Override
                 public void onScanResult(int callbackType, ScanResult result) {
+                    // Get the bluetooth device
                     Log.i(TAG, "Found a bluetooth device!");
                     super.onScanResult(callbackType, result);
                     BluetoothDevice bluetoothDevice = result.getDevice();
+
                     if (!BluetoothDevicesProvider.contains(bluetoothDevice.getAddress())) {
+                        // Add the device to the list and observe it
                         Log.i(TAG, "Adding new device to list");
                         Device device = new Device(bluetoothDevice, getContext());
                         BluetoothDevicesProvider.addDevice(device);
@@ -153,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
         return this;
     }
 
+    /**
+     * Notifies the list adapter to changes in a observed device in the ui thread
+     * @param observable Device with changed properties
+     * @param o
+     */
     @Override
     public void update(Observable observable, Object o) {
         runOnUiThread(new Runnable() {

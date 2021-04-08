@@ -14,6 +14,14 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
+/**
+ * Device
+ *
+ * Stores all information about a connected Bluetooth device and handles all communication.
+ * Is observable for changes in the status and properties of the device.
+ *
+ * @author Ruben
+ */
 public class Device extends Observable implements Observer {
     private final static String TAG = "DEVICE";
 
@@ -45,6 +53,11 @@ public class Device extends Observable implements Observer {
     private static final int TYPE_SENSOR = 1;
     private static final int TYPE_SERVO = 2;
 
+    /**
+     * Constructor
+     * @param bluetoothDevice
+     * @param context context of the main activity
+     */
     public Device(BluetoothDevice bluetoothDevice, Context context) {
         this.device = bluetoothDevice;
         this.context = context;
@@ -53,12 +66,23 @@ public class Device extends Observable implements Observer {
         bluetoothGatt = device.connectGatt(context, false, gattCallback);
     }
 
+    /**
+     * Handle callbacks from the GATT server for this device
+     */
     private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+
+        /**
+         * Handle connection and disconnection of the peripheral
+         * @param gatt
+         * @param status
+         * @param newState
+         */
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+                // When connected start discovering services
                 connectionState = STATE_CONNECTED;
                 Log.i(TAG, "Connected to GATT server.");
                 Log.i(TAG, "Attempting to start service discovery:" +
@@ -68,10 +92,16 @@ public class Device extends Observable implements Observer {
                 Log.i(TAG, "Disconnected from GATT server for device: " + device.getName());
             }
 
+            // Notify observers of the changed status
             setChanged();
             notifyObservers();
         }
 
+        /**
+         * Store the service type when services are discovered
+         * @param gatt
+         * @param status
+         */
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             super.onServicesDiscovered(gatt, status);
@@ -85,6 +115,11 @@ public class Device extends Observable implements Observer {
 
         }
 
+        /**
+         * Initiate handling changes to characteristics
+         * @param gatt
+         * @param characteristic
+         */
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             super.onCharacteristicChanged(gatt, characteristic);
@@ -92,11 +127,18 @@ public class Device extends Observable implements Observer {
             bluetoothGatt.readCharacteristic(characteristic);
         }
 
+        /**
+         * Store the angle when the characteristic is read
+         * @param gatt
+         * @param characteristic
+         * @param status
+         */
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
 
             if (status == BluetoothGatt.GATT_SUCCESS) {
+                // Determine the format of the value and store the angle
                 Log.i(TAG, "Characteristic read!");
                 int flag = characteristic.getProperties();
                 int format = -1;
@@ -115,6 +157,12 @@ public class Device extends Observable implements Observer {
             }
         }
 
+        /**
+         * Log when a characteristic is successfully written
+         * @param gatt
+         * @param characteristic
+         * @param status
+         */
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
@@ -122,11 +170,16 @@ public class Device extends Observable implements Observer {
         }
     };
 
+    /**
+     * Determine if the device exposes the service of a sensor of a servo and store the type
+     * @param gatt
+     */
     private void setServiceType(BluetoothGatt gatt) {
         for (BluetoothGattService service: gatt.getServices()) {
             UUID uuid = service.getUuid();
             Log.i(TAG, "Found service: " + uuid + " for device: " + device.getName());
             if (uuid.equals(UUID_HUMAN_INTERFACE_DEVICE_SERVICE)) {
+                // If the device is a sensor, subscribe to new sensor data
                 Log.i(TAG, "This is a sensor!");
                 deviceType = TYPE_SENSOR;
                 subscribeToSensorData(service);
@@ -137,6 +190,10 @@ public class Device extends Observable implements Observer {
         }
     }
 
+    /**
+     * Subscribe to changes in the characteristics for sensor data
+     * @param service
+     */
     private void subscribeToSensorData(BluetoothGattService service) {
         for (BluetoothGattCharacteristic characteristic: service.getCharacteristics()) {
             Log.i(TAG, "Found characteristic: " + characteristic.getUuid() + " for device: " + device.getName());
@@ -153,6 +210,10 @@ public class Device extends Observable implements Observer {
         bluetoothGatt.readCharacteristic(characteristic);
     }
 
+    /**
+     * Store the current angle of the device and notify observers
+     * @param angle new angle
+     */
     private void setAngle(int angle) {
         if (angle != this.angle) {
             this.angle = angle;
@@ -161,6 +222,11 @@ public class Device extends Observable implements Observer {
         }
     }
 
+    /**
+     * Set the angle of the connected device
+     * @param angle new angle
+     * @param notify if observers should be notified
+     */
     public void writeAngle(int angle, boolean notify) {
         if (angle != this.angle) {
             this.angle = angle;
@@ -208,6 +274,9 @@ public class Device extends Observable implements Observer {
         return angle;
     }
 
+    /**
+     * Disconnect from the connected bluetooth device
+     */
     public void disconnect() {
         if (bluetoothGatt == null) {
             return;

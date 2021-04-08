@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * BluetoothDevicesProvider
  *
- * Provides the bluetooth devices
+ * Provides the bluetooth devices list
  *
  * @author Ruben
  */
