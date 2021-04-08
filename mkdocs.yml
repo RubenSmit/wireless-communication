@@ -38,6 +38,7 @@ plugins:
         back_cover: true
         #cover_title: TITLE TEXT
         cover_subtitle: IOT specialization | HBO-ICT Software Engineering
+        cover_logo: /docs/img/cover-image.jpg
         #custom_template_path: TEMPLATES PATH
         #
         #toc_title: TOC TITLE TEXT
