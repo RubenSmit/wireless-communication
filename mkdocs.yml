@@ -4,6 +4,11 @@ site_name: Wireless communications
 site_description: 'Documentation of wireless communications'
 site_author: 'Willem Dekker, Ruben Smit'
 
+# Repository
+repo_url: https://github.com/RubenSmit/wireless-communication
+repo_name: RubenSmit/wireless-communication
+edit_uri: ""
+
 # Copyright
 copyright: Copyright &copy; 2021 Ruben Smit, Willem Dekker
 
@@ -13,7 +18,14 @@ theme:
   # features:
   #   - navigation.tabs
   palette:
-    scheme: preference
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
   language: nl
 plugins:
   - search:
@@ -55,3 +67,8 @@ plugins:
         #debug_html: true
         #show_anchors: true
         #verbose: true
+nav:
+  - Home : index.md
+  - NRF24L01+ documentation: nrf24-documentation.md\
+  - High level Radio: system-documentation.md
+  - LED app: lowlevelradio.md
