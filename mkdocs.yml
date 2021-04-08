@@ -74,7 +74,7 @@ nav:
   - Introduction : index.md
   - High level Radio: system-documentation.md
   - Low level radio:
-    - Low level Radio theory: general-questions.md
+    - Theory: theory.md
     - LED app: led-app.md
     - PER app: per-app.md
     - Throughput test app: throughput-test-app.md
