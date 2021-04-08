@@ -491,7 +491,7 @@ public int getItemViewType(int position) {
 }
 ```
 
-The view type is determined for the current list position by getting the device from the devices provider ant matching the type.
+The view type is determined for the current list position by getting the device from the devices provider and matching the type.
 
 ##### Servo View
 The servo view contains a seekbar to change the angle of the servo and a dropdown to select the source of the angle.
@@ -537,14 +537,27 @@ holder.spSource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener
 
 A list of available sources is created by getting all devices from the device provider and filtering them on device type. For each available source a dropdown item is created. The currently used source is pre-selected in the dropdown. When a item in the dropdown is selected the `OnItemSelectedListener` handles the event and sets the new source for the servo device.
 
-## Demonstrations and tests
-TODO
+## Tests
+Three tests where preformed to validate the system.
 
-### Full app demo
-[app-demo.mp4](app-demo.mp4)
+### Potentiometer rotation test
+For this test a Sensor peripheral and a Android phone running the application where used. The goal of the test was to determine if the angle of the potentiomenter on the peripheral was correctly displayed on the dashboard. Also tested was if the angle of the potentiometer was changed the dashboard was updated with the new angle in a timely manner.
 
-### Fipy with phone demo
-[fipy-with-phone-demo.mp4](fipy-with-phone-demo.mp4)
+The test proved to be successfull. The angle displayed on the dashboard matched the angle of the potentiometer and changes in the angle of the potentiometer where displayed correctly on the dashboard within a second.
 
-### NRF52 with phone demo
-[NRF52-with-phone-demo.mp4](NRF52-with-phone-demo.mp4)
+### Servo rotation test
+This test was preformed using a Servo peripheral and a Android phone running the application. The goal of the test was to determine if the angle of the servo matched the setting on the dashboard. Also tested was if the angle of the servo changed according to the input on the dashboard.
+
+The test was successfull. The angle displayed matched the angle of the servo and when the angle was changed on the dashboard the servo quickly rotated to the new angle.
+
+### Combined rotation test
+During this test both a Sensor and Servo peripheral where used, as well as a Android phone running the application. The goal was to test if the angle of the servo would match the angle of the potentiometer when the sensor was selected as source for the servo on the dashboard.
+
+It was possible to link the angle of the servo to the angle of the potentiometer during the tests. The tests where therefore successfull.
+
+## Demonstrations
+The following video's demonstrate the working system in several ways:
+
+- **Full app demonstration** [app-demo.mp4](app-demo.mp4) displaying connecting sensors and servo's, displaying changes in angle of the sensor, changing the angle of the servo and linking the angle of the sensor to the servo.
+- **Fipy with phone demonstration** [fipy-with-phone-demo.mp4](fipy-with-phone-demo.mp4) displaying controlling the angle of the servo using the app.
+- **NRF52 with phone demonstration** [NRF52-with-phone-demo.mp4](NRF52-with-phone-demo.mp4) displaying changing the angle of the potentiometer and displaying the changes in the app.
