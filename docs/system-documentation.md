@@ -434,6 +434,39 @@ public void writeAngle(int angle, boolean notify) {
 When a new angle is written to a Device model a attempt is made to write it to the characteristic. If specified the observers of the model are notified of the change.
 
 #### Bluetooth Devices Provider
+```java
+public static List<Device> deviceList;
+public static Map<String, Device> deviceMap;
+public static BluetoothDevicesListAdapter adapter;
+```
+
+The BluetoothDevicesProvider maintains a list of all connected devices. It also stores the instance of the devices list adapter that displays the list of devices so it can notify the adapter of any changes to the list.
+
+```java
+public static void addDevice(Device device) {
+    if (!contains(device.getDeviceAddress())) {
+        deviceList.add(device);
+        deviceMap.put(device.getDeviceAddress(), device);
+        adapter.notifyDataSetChanged();
+    }
+}
+```
+
+New devices can be added to the list and the adapter will be notified of the change.
+
+```java
+public static void clear() {
+    for(Device device: deviceList) {
+        device.disconnect();
+    }
+
+    deviceList.clear();
+    deviceMap.clear();
+    adapter.notifyDataSetChanged();
+}
+```
+
+When the list with devices must be cleared each device is disconnected and the lists are cleared. The adapter is notified of the changes to the list.
 
 #### Bluetooth Devices List Adapter
 

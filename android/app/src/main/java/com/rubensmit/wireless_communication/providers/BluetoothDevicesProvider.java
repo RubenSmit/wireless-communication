@@ -34,7 +34,7 @@ public class BluetoothDevicesProvider {
 
     /**
      * Adding device to the list and hashes
-     * @param device
+     * @param device a Device model
      */
     public static void addDevice(Device device) {
         if (!contains(device.getDeviceAddress())) {
@@ -57,6 +57,11 @@ public class BluetoothDevicesProvider {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Checks if the list contains a certain device
+     * @param deviceAddress address of the device to check agains the list
+     * @return if the list contains the device
+     */
     public static boolean contains(String deviceAddress) {
         return deviceMap.containsKey(deviceAddress);
     }
