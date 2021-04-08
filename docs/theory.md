@@ -116,16 +116,6 @@ The theory assignments for the Wireless Communication course consist of general 
 | 7 | MISO | Master In, Slave Out (SPI) | 12       |
 | 8 | IRQ  | Interrupt                  | 7        |
 
-## Bigger assignments
-> TODO: This should be moved...
-
-Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples *4000 us* 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
-
-We have included the code for two of the assignments we have made in [/nrf-24-slightly-bigger-assignment](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-slightly-bigger-assignment) for the slightly bigger assingment and [/nrf24-packet-error-rate](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-packet-error-rate/PacketErrorRAte) for the packet error rate assignment. Although these do not work we hope this shows our effort. We did not start with the throughput assingment yet.
-
-The construction of the devices:
-![Nucleos-with-nrf24.jpg](img/Nucleos-with-nrf24.jpg)
-
 [1]: https://oem.bmj.com/content/61/9/769
 [2]: https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf
 [3]: https://en.wikipedia.org/wiki/List_of_WLAN_channels#2.4_GHz_(802.11b/g/n/ax)
