@@ -1,8 +1,6 @@
-# Low level radio
+# Led APP
 
-## Led APP
-
-### pinout and functions of NRF24L01
+## pinout and functions of NRF24L01
 
 | PIN number | Arduino connection | function                                                                                                          |
 |------------|--------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -15,7 +13,7 @@
 | 7          | D12                | MISO: Master in slave out pin this is the output pin for data drom the nrf to the microcontroller                 |
 | 8          | D7                 | IRQ: This is the inrerrupt pin an wil be active low when triggerd                                                 |
 
-### packet definition
+## packet definition
 
 The data that needs to be transported between the two radio's is the following:
 should i go to the next pin, should i go the previous pin, and what pin am I on?
@@ -30,16 +28,16 @@ something like this:
 So, this packet tells you need to go back one pin and the current pin is 1. So,
 a packet containing 0x010003 would be go to next pin current pin is 3.
 
-### communication beween the boards
+## communication beween the boards
 
-![](img/packet-flow-led-app.png)
+![Diagram for packet flow](img/packet-flow-led-app.png)
 
 The boards would send a package
-described above to the other board and increment or decrement the pointer value
+described above to the other board and increment or decretent the pointer value
 given in the packet this packet would sync the boards if there was a discrepancy
 between them. This is shown in the picture below.
 
-### Implementation
+## Implementation
 
 During the implementation of this project, we stumbled on a few roadblocks the
 code that was provided in the assignment was out of date and would not compile a
