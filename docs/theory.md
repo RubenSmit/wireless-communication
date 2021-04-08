@@ -1,5 +1,7 @@
 # Theory
+The theory assignments for the Wireless Communication course consist of general questions about the NRF24L01+ radio. These general questions are answered in this chapter. Furthermore a table describing the name and function of each NRF24L01+ pin has been added, with their connection to the Arduino uno compatible pins.
 
+## General questions
 1. **What is the maximum output power from the NRF24 module?**
 	- 0 dBm [2]
 	1. **How does that compare to the output power of a 3G/4G mobile phone?**
@@ -115,6 +117,7 @@
 | 8 | IRQ  | Interrupt                  | 7        |
 
 ## Bigger assignments
+> TODO: This should be moved...
 
 Unfortunately we did not succeed in getting the nrf24l01+ running with a nucleo. We got it working in Arduino within 10 minutes but with the Nucleo it was impossible for us. We have put in a lot of work, but we did not manage to get it working. Half way through we found out that the `enableAutoAcknowledge()` function of the libary is broken and breaks the radio. But even with our current code it is not possible to recieve messages. Although the code claims several bytes have been sent it is theoretically not possible timing wise. It should take 500 samples *4000 us* 15 retries = 30 seconds when there is no reciever, but it takes only a fraction of that. We can not find out what we are doing wrong, and it is so easy in Arduino.
 
