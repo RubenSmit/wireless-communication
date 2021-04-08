@@ -10,8 +10,8 @@ copyright: Copyright &copy; 2021 Ruben Smit, Willem Dekker
 # Congiguration
 theme:
   name: material
-  features:
-    - navigation.tabs
+  # features:
+  #   - navigation.tabs
   palette:
     scheme: preference
   language: nl
