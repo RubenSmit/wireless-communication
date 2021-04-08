@@ -40,21 +40,67 @@ This was chosen because we are setting the plane angle of the servo. The angle i
 The Android phone does not expose any services and characteristics. It does however read the angle of connected NRF52 peripherals and subscribes to notifications in changes to this angle. It also reads the angles of connected FiPy peripherals and writes a new angle if needed.
 
 ## System Usage
-The system consists of 3 devices.
+TODO
 
-  - A android phone running the android progam in [/android](https://github.com/RubenSmit/wireless-communication/tree/main/android).
-  - A nrf52 with a attached potentiometer (10k on pin A0) running the program in [/nrf52](https://github.com/RubenSmit/wireless-communication/tree/main/nrf52).
-  - A FiPy with a attached servo (on pin P23) running the program in [/fipy](https://github.com/RubenSmit/wireless-communication/tree/main/fipy).
+### Preparing the NRF52
+Follow the following steps to prepare the NRF52 with the attached potentiometer to be used as a Human Interface Device.
 
-#### NRF52 connections
+#### Bill of materials
+The following materials are needed:
+- Nordic-nRF52-DK
+- 10K Ohm potentiometer
+- 3 Jumper wires male-female
+
+#### Connecting the materials
+Connect the potentiometer to the NRF50 according to the following schematic. In the image below a example is shown of how these are connected.
+| NRF52 pin | Potentiometer pin |
+|-----------|-------------------|
+| VDD       | Fixed end (P1)    |
+| A0        | Wiper (P2)        |
+| GND       | Fixed end (P3)    |
+
 ![NRF52-with-potentiometer.jpg](NRF52-with-potentiometer.jpg)
 
-#### FiPy connections
+#### Uploading the code
+Upload the code found in [/nrf52](https://github.com/RubenSmit/wireless-communication/tree/main/nrf52) to the NRF52 using Visual Studio Code with the PlatformIO plugin.
+
+### Preparing the FiPy
+Follwo the following steps to prepare the FiPy with the attached servo to be used as a Automation IO device.
+
+#### Bill of materials
+The following materials are needed:
+- FiPy with Expansion board
+- Servo motor
+- 5V 500mA External power supply
+- Breadboard
+- 7 Jumper wires male-male
+
+#### Connecting the materials
+Connect the servo to the FiPy and the power supply on the breadboard according to the following schematic. In the image below a example is shown of how these are connected.
+| FiPy pin | Servo pin | External power supply (5V 500mA) |
+|----------|-----------|----------------------------------|
+|          | 5v        | Positive                         |
+| P23      | Signal    |                                  |
+| GND      | GND       | Negative                         |
+
 ![fipy-with-servo.jpg](fipy-with-servo.jpg)
 
+#### Uploading the code
+Upload the code found in [/fipy](https://github.com/RubenSmit/wireless-communication/tree/main/fipy) to the FiPy using Visual Studio Code with the Pycom plugin.
+
+### Preparing the Android phone
+TODO
+[/android](https://github.com/RubenSmit/wireless-communication/tree/main/android)
+
+### Operation
+TODO
+
 ## Code
+TODO
 
 ## Demonstrations and tests
+TODO
+
 ### Full app demo
 [app-demo.mp4](app-demo.mp4)
 
