@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="nl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Documentation of wireless communications" name="description"/>
+<meta content="Ruben Smit (423723), Willem Dekker (436608)" name="author"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-7.1.0" name="generator"/>
+<title>Theory - Wireless communications</title>
+<link href="../assets/stylesheets/main.33e2939f.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.ef6f36e2.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+</head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#theory">
+          Ga naar inhoud
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Wireless communications" class="md-header__button md-logo" data-md-component="logo" href=".." title="Wireless communications">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Wireless communications
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Theory
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"></path></svg>
+</label>
+<input class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Zoeken" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Zoeken" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/RubenSmit/wireless-communication" title="Ga naar repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    RubenSmit/wireless-communication
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Wireless communications" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Wireless communications">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Wireless communications
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/RubenSmit/wireless-communication" title="Ga naar repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    RubenSmit/wireless-communication
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Introduction
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../system-documentation/">
+        High level Radio
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+        Low level radio
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Low level radio" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          Low level radio
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Theory
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Theory
+      </a>
+<nav aria-label="Inhoudsopgave" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#general-questions">
+    General questions
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf24l01-pinout-table">
+    nRF24L01+ pinout table
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../led-app/">
+        LED app
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../per-app/">
+        PER app
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../throughput-test-app/">
+        Throughput test app
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Inhoudsopgave" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#general-questions">
+    General questions
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf24l01-pinout-table">
+    nRF24L01+ pinout table
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="theory">Theory</h1>
+<p>The theory assignments for the Wireless Communication course consist of general questions about the NRF24L01+ radio. These general questions are answered in this chapter. Furthermore a table describing the name and function of each NRF24L01+ pin has been added, with their connection to the Arduino uno compatible pins.</p>
+<h2 id="general-questions">General questions</h2>
+<ol>
+<li>
+<p><strong>What is the maximum output power from the NRF24 module?</strong></p>
+<ul>
+<li>0 dBm <a href="https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf">2</a></li>
+<li><strong>How does that compare to the output power of a 3G/4G mobile phone?</strong><ul>
+<li>Between 0 and 30 dBm <a href="https://oem.bmj.com/content/61/9/769">1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a frequency band?</strong></p>
+<ul>
+<li>The operating frequencys that a device works in.</li>
+</ul>
+</li>
+<li>
+<p><strong>Which frequency bands can be used by this radio? (check the datasheet)</strong></p>
+<ul>
+<li>From 2.400GHz to 2.525GHz <a href="https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf">2</a></li>
+<li><strong>Which bands are used by WiFi and Bluetooth?</strong><ul>
+<li>Wifi: 2401 MHz to 2495 MHz <a href="https://en.wikipedia.org/wiki/List_of_WLAN_channels#2.4_GHz_(802.11b/g/n/ax)">3</a></li>
+<li>Bluethooth: 2400 to 2483.5 MHz <a href="https://www.bluetooth.com/learn-about-bluetooth/key-attributes/range/#:~:text=Bluetooth%C2%AE%20technology%20uses%20the,for%20low%2Dpower%20wireless%20connectivity.">4</a></li>
+</ul>
+</li>
+<li><strong>Where does the NRF24 overlap with these bands?</strong><ul>
+<li>From stat to  finnish only the 5G wifi is not overlapped</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the wavelength in meters for the used NRF24 frequency band?</strong></p>
+<ul>
+<li>300.000.000 / 2.400.000.000 = 0.125m</li>
+<li>300.000.000 / 2.483.500.000 = 0.120m</li>
+</ul>
+</li>
+<li>
+<p><strong>Which data rates does the radio support?</strong></p>
+</li>
+<li>
+<p>250kbps, 1Mbps and 2Mbps <a href="https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf">2</a></p>
+</li>
+<li>
+<p><strong>How many channels does the radio support?</strong></p>
+<ul>
+<li>126 channels so 8 bit <a href="https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf">2</a></li>
+<li><strong>What is the relationship between channels and frequencies?</strong></li>
+<li>F0= 2400 + RF_CH MHz you add the channel to 2400 and you get the frequency <a href="https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf">2</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Which modulation technique does the radio use? Explain how this modulation technique works in your own words.</strong></p>
+<ul>
+<li>GFSK: Gaussian frequency shift keying is a modulation method for digital communication. it uses a Gaussian filter before the signal is send. FSK is the input in this system this is modulation where the frycuentcy of a signal is changed depending if the bit is a 1 or 0</li>
+</ul>
+</li>
+<li>
+<p><strong>Power consumption in the idle mode states (power-down, standby-I and standby-II). Explain in your own words what the different states do.</strong></p>
+<ul>
+<li>power-down: 900nA, this mode has the radio turned off so only the standby of the chip is used</li>
+<li>standby-I: 26µA, this mode reduces power by running the radio in a half turned off way</li>
+<li>standby-II: 320µA, the same mode as standby-i but with extra buffers so the startup time is lower</li>
+</ul>
+</li>
+<li>
+<p><strong>Power consumption in the transmit state at the four different output levels.</strong></p>
+<ul>
+<li>0dBm output power: 11.3 mA</li>
+<li>-6dBm output power: 9.0 mA</li>
+<li>-12dBm output power: 7.5 mA</li>
+<li>-18dBm output power: 7.0 mA</li>
+</ul>
+</li>
+<li>
+<p><strong>Power consumption in the receive mode state for the three different air data rates.</strong></p>
+<ul>
+<li>Supply current 2Mbps: 13.5 mA</li>
+<li>Supply current 1Mbps: 13.1 mA</li>
+<li>Supply current 250kbps: 12.6mA</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Enhanced ShockBurst and what are the most important functions? Describe this in your own words.</strong></p>
+<ul>
+<li>Enhanced ShockBurst (ESB) is a protocol supporting two way data transfer it takes care of importend features such as retransmission, buffering, packet acknowledgment.</li>
+</ul>
+</li>
+<li>
+<p><strong>On what layer in the ISO/OSI model does this operate?</strong></p>
+<ul>
+<li>layer 2</li>
+</ul>
+</li>
+<li>
+<p><strong>Look at the format of the radio packet (section 7.3 on page 28 of the datasheet) and describe the function of the following fields:</strong></p>
+<ul>
+<li>Address: addres of the reciever this is for what radio the packet is ment</li>
+<li>PID (Packet Identification): this part contains all the meta data of the packet like the legth of the payload, packet information (is it a retransmit or not)</li>
+<li>No acknowledgement flag  should it send a ack back to the sender this so it knows you got the message</li>
+<li>CRC: this is a checksum bytes these are set by means of a calculation</li>
+</ul>
+</li>
+<li>
+<p><strong>Enhanced ShockBurst is able to automatically validate a packet. Describe how this process works in your own words. Give an example of a packet that is broken and describe how the radio is able to detect this.</strong></p>
+<ul>
+<li>before transmission the CRC bytes are calcculated by the radio this is done over the hole packet exept the crc bytes this is than recalculated at the receving end and checked, if the bytes dont match you can detect that the transmission was not succesfull.</li>
+</ul>
+</li>
+<li>
+<p><strong>What conditions define a good address (see section 7.3.2 of thedatasheet)? Give an example of a good 5-byte address that adheres to these conditions. Write the address in hexadecimal and binary format.</strong></p>
+<ul>
+<li>Adresses with more than one level shift and no continuation of the preamble can be considered good addresses.</li>
+<li>0x313D371F2F, 0011 0001 0011 1101 0011 0111 0001 1111 0010 1111</li>
+</ul>
+</li>
+<li>
+<p><strong>Give an example of a bad 5-byte address and explain why this is not a good address. Write the address in hexadecimal and binary.</strong></p>
+<ul>
+<li>0x000FFFFFFF, 0000 0000 0000 1111 1111 1111 1111 1111 1111 1111</li>
+<li>Only one level shift</li>
+</ul>
+</li>
+<li>
+<p><strong>Find on the internet what the cost / price (high and low) is of this module.</strong></p>
+<ul>
+<li>Zeer goedkoop, rond de €0,56 ex verzenden uit china <a href="https://www.aliexpress.com/item/32501134468.html?spm=a2g0o.productlist.0.0.3d76793aWupHIM&amp;algo_pvid=80882da0-47b8-4da3-88bc-fdefecfd0a09&amp;algo_expid=80882da0-47b8-4da3-88bc-fdefecfd0a09-2&amp;btsid=0b0a187916116881340081465e4f23&amp;ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_">5</a> en €2,50 ex verzenden uit nederland <a href="https://www.tinytronics.nl/shop/nl/communicatie/rf/nrf24l01-wireless-module-zwart">6</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Findthree alternative radiomodules or shields and for each module</strong></p>
+<ol>
+<li><strong>RFM69HW <a href="https://www.tinytronics.nl/shop/nl/communicatie/rf/hoperf-rfm69hw-433mhz-rf-transceiver-high-power">7</a></strong><ul>
+<li>What technique is used for communication: FSK, GFSK, MSK, GMSK, OOK modulations, make your own protocol</li>
+<li>What is the cost of the shield / module: €4,75</li>
+<li>What software is available for this module / shield: Arduino library</li>
+</ul>
+</li>
+<li><strong>HC-05 <a href="https://www.tinytronics.nl/shop/nl/communicatie/bluetooth/bluetooth-hc-05-module-rf-transceiver-master-en-slave">8</a></strong><ul>
+<li>What technique is used for communication: Bluetooth</li>
+<li>What is the cost of the shield / module: €6,00</li>
+<li>What software is available for this module / shield: Arduino library</li>
+</ul>
+</li>
+<li><strong>433MKIT <a href="https://www.tinytronics.nl/shop/nl/communicatie/rf/433mhz-rf-transmitter-en-receiver-link-kit">9</a></strong><ul>
+<li>What technique is used for communication: AM, make your own protocol</li>
+<li>What is the cost of the shield / module: €2,50</li>
+<li>What software is available for this module / shield: Arduino library</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Add a table to you report that describes the name and the function of every NRF24 pin. Include to which pin of the Arduino Uno header the NRF24 pin is connected.</strong></p>
+<ul>
+<li>See <a href="#nRF24L01+-pinout-table">nRF24L01+ pinout table</a></li>
+</ul>
+</li>
+<li>
+<p><strong>The Hello World! example has the TX and RX address configured to a default value. What do you think would happen If a classroom full of students would start using the same address?</strong></p>
+<ul>
+<li>Huilen. Due to interference most messages will not be transmitted properly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Have a look at the method ‘setRegister’. This method is used quite often in the library. What is the function of this method and what is happening in the radio when this function is called?</strong></p>
+<ul>
+<li>The radio is configured and controlled using registers. Every register has a address and controls a diferent setting. This method sets the value of a register and therefore configures the radio.</li>
+</ul>
+</li>
+<li>
+<p><strong>At the top of the .cppfile, have a look at the list of ‘_NRF24L01P_REG...’ definitions. What are these values and where can you find them in the NRF24 datasheet?</strong></p>
+<ul>
+<li>These are the addresses of the different registers. These can be found under 9.1 in the datasheet <a href="https://www.nordicsemi.com/-/media/DocLib/Other/Product_Spec/nRF24L01PPSv10.pdf">2</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find in the datasheet what ‘ART’ stands for and explain this in your own words.</strong></p>
+<ul>
+<li>Auto Re-Transmission. It automagically retransmits a package if the reciever did not confirm that it revieved id (did not send a ACK).</li>
+</ul>
+</li>
+</ol>
+<h2 id="nrf24l01-pinout-table">nRF24L01+ pinout table</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Function</th>
+<th>Uno pin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>GND</td>
+<td>Ground</td>
+<td>Ground</td>
+</tr>
+<tr>
+<td>2</td>
+<td>VCC</td>
+<td>Voltage source</td>
+<td>3.3 volt</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CE</td>
+<td>Chip Enable</td>
+<td>9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CSN</td>
+<td>Chip Select Not</td>
+<td>8</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SCK</td>
+<td>Serial Clock (SPI)</td>
+<td>13</td>
+</tr>
+<tr>
+<td>6</td>
+<td>MOSI</td>
+<td>Master Out, Slave In (SPI)</td>
+<td>11</td>
+</tr>
+<tr>
+<td>7</td>
+<td>MISO</td>
+<td>Master In, Slave Out (SPI)</td>
+<td>12</td>
+</tr>
+<tr>
+<td>8</td>
+<td>IRQ</td>
+<td>Interrupt</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a class="md-footer__link md-footer__link--prev" href="../system-documentation/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Vorige
+              </span>
+              High level Radio
+            </div>
+</div>
+</a>
+<a class="md-footer__link md-footer__link--next" href="../led-app/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Volgende
+              </span>
+              LED app
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 Ruben Smit, Willem Dekker
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+ ... <a class="link--pdf-download" download href="../pdf/Wireless-communication-Willem-Dekker-Ruben-Smit.pdf" title="PDF">download PDF</a></div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Kopi\u00ebren naar klembord", "clipboard.copied": "Gekopieerd naar klembord", "search.config.lang": "nl", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Zoeken", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+<script src="../assets/javascripts/bundle.d892486b.min.js"></script>
+</body>
+</html>

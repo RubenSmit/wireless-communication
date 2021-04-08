@@ -1,0 +1,1211 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="nl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Documentation of wireless communications" name="description"/>
+<meta content="Ruben Smit (423723), Willem Dekker (436608)" name="author"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-7.1.0" name="generator"/>
+<title>High level Radio - Wireless communications</title>
+<link href="../assets/stylesheets/main.33e2939f.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.ef6f36e2.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+</head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#high-level-radio">
+          Ga naar inhoud
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Wireless communications" class="md-header__button md-logo" data-md-component="logo" href=".." title="Wireless communications">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Wireless communications
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              High level Radio
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"></path></svg>
+</label>
+<input class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Zoeken" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Zoeken" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/RubenSmit/wireless-communication" title="Ga naar repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    RubenSmit/wireless-communication
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Wireless communications" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Wireless communications">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Wireless communications
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/RubenSmit/wireless-communication" title="Ga naar repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    RubenSmit/wireless-communication
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Introduction
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          High level Radio
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        High level Radio
+      </a>
+<nav aria-label="Inhoudsopgave" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-goal">
+    System Goal
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#roles-of-of-the-devices">
+    Roles of of the Devices
+  </a>
+<nav aria-label="Roles of of the Devices" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf52">
+    NRF52
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fipy">
+    FiPy
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#android-phone">
+    Android phone
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#services-and-characteristics">
+    Services and Characteristics
+  </a>
+<nav aria-label="Services and Characteristics" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf52_1">
+    NRF52
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fipy_1">
+    FiPy
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#android-phone_1">
+    Android phone
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-usage">
+    System Usage
+  </a>
+<nav aria-label="System Usage" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preparing-the-nrf52">
+    Preparing the NRF52
+  </a>
+<nav aria-label="Preparing the NRF52" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bill-of-materials">
+    Bill of materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connecting-the-materials">
+    Connecting the materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uploading-the-code">
+    Uploading the code
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preparing-the-fipy">
+    Preparing the FiPy
+  </a>
+<nav aria-label="Preparing the FiPy" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bill-of-materials_1">
+    Bill of materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connecting-the-materials_1">
+    Connecting the materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uploading-the-code_1">
+    Uploading the code
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preparing-the-android-phone">
+    Preparing the Android phone
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#operation">
+    Operation
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code">
+    Code
+  </a>
+<nav aria-label="Code" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf52_2">
+    NRF52
+  </a>
+<nav aria-label="NRF52" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#main-function">
+    Main function
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#human-interface-device-service">
+    Human Interface Device Service
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fipy_2">
+    FiPy
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#android">
+    Android
+  </a>
+<nav aria-label="Android" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#main-activity">
+    Main Activity
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#device-model">
+    Device Model
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bluetooth-devices-provider">
+    Bluetooth Devices Provider
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bluetooth-devices-list-adapter">
+    Bluetooth Devices List Adapter
+  </a>
+<nav aria-label="Bluetooth Devices List Adapter" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#servo-view">
+    Servo View
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tests">
+    Tests
+  </a>
+<nav aria-label="Tests" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#potentiometer-rotation-test">
+    Potentiometer rotation test
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#servo-rotation-test">
+    Servo rotation test
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#combined-rotation-test">
+    Combined rotation test
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#demonstrations">
+    Demonstrations
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+        Low level radio
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Low level radio" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          Low level radio
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../theory/">
+        Theory
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../led-app/">
+        LED app
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../per-app/">
+        PER app
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../throughput-test-app/">
+        Throughput test app
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Inhoudsopgave" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-goal">
+    System Goal
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#roles-of-of-the-devices">
+    Roles of of the Devices
+  </a>
+<nav aria-label="Roles of of the Devices" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf52">
+    NRF52
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fipy">
+    FiPy
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#android-phone">
+    Android phone
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#services-and-characteristics">
+    Services and Characteristics
+  </a>
+<nav aria-label="Services and Characteristics" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf52_1">
+    NRF52
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fipy_1">
+    FiPy
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#android-phone_1">
+    Android phone
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-usage">
+    System Usage
+  </a>
+<nav aria-label="System Usage" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preparing-the-nrf52">
+    Preparing the NRF52
+  </a>
+<nav aria-label="Preparing the NRF52" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bill-of-materials">
+    Bill of materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connecting-the-materials">
+    Connecting the materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uploading-the-code">
+    Uploading the code
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preparing-the-fipy">
+    Preparing the FiPy
+  </a>
+<nav aria-label="Preparing the FiPy" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bill-of-materials_1">
+    Bill of materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#connecting-the-materials_1">
+    Connecting the materials
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uploading-the-code_1">
+    Uploading the code
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preparing-the-android-phone">
+    Preparing the Android phone
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#operation">
+    Operation
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#code">
+    Code
+  </a>
+<nav aria-label="Code" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nrf52_2">
+    NRF52
+  </a>
+<nav aria-label="NRF52" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#main-function">
+    Main function
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#human-interface-device-service">
+    Human Interface Device Service
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fipy_2">
+    FiPy
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#android">
+    Android
+  </a>
+<nav aria-label="Android" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#main-activity">
+    Main Activity
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#device-model">
+    Device Model
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bluetooth-devices-provider">
+    Bluetooth Devices Provider
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bluetooth-devices-list-adapter">
+    Bluetooth Devices List Adapter
+  </a>
+<nav aria-label="Bluetooth Devices List Adapter" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#servo-view">
+    Servo View
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tests">
+    Tests
+  </a>
+<nav aria-label="Tests" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#potentiometer-rotation-test">
+    Potentiometer rotation test
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#servo-rotation-test">
+    Servo rotation test
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#combined-rotation-test">
+    Combined rotation test
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#demonstrations">
+    Demonstrations
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="high-level-radio">High level Radio</h1>
+<p>This documentation describes our high level radio project in which we demonstrate Bluetooth Low Energy (BLE) communication between three different devices. First we will describe the goal of our system. Next the roles of the different devices are described followed by the services and characteristics used in the BLE communciation. We also note how to use the system and the inner workings of the code is explained. Finally some demonstrations of the working system are shown and how we tested the system.</p>
+<h2 id="system-goal">System Goal</h2>
+<p>The goal of this system is to send the current angle of a potentiometer to an android application where it is displayed on a dashboard. From this dashboard it should be possible to control the angle of a servo motor, the angle of the servo should be shown on the dashboard. It should also be possible to link the angle of the servo motor to the angle of the potentiometer.</p>
+<h2 id="roles-of-of-the-devices">Roles of of the Devices</h2>
+<p>The system will consist of three devices: a NRF52, a Android phone and a FiPy. Each of these devices will have a different role and task in the system which will be described below.</p>
+<h3 id="nrf52">NRF52</h3>
+<p>The NRF52 will act as a BLE Peripheral. A potentiometer will be attached to the NRF52 and the angle of this potentiometer can be read by a connected central.</p>
+<h3 id="fipy">FiPy</h3>
+<p>The FiPy will act as a BLE Peripheral. It will be attached to a servo and the current angle of this servo can be read by a connected central. It will also be possible to set a new angle for the servo.</p>
+<h3 id="android-phone">Android phone</h3>
+<p>On the android phone a appplication will run that displays a dashboard. It will function as a BLE Central and connect to NRF52 and FiPy peripherals. It wil read the angle of the potentiometers of connected NRF52 peripherals and display those on the dashboard. When the angle of a potentiometer changes the dashboard is updated. The current angle of the servos of connected FiPy peripherals is also displayed. Using the dashboard the angle of the servos can be changed.</p>
+<h2 id="services-and-characteristics">Services and Characteristics</h2>
+<p>Both peripheral types expose a BLE service with a characteristic, the Android phone connects to these peripherals and uses these services and characteristics. A description will be given of the services and characteristics available from each peripheral and whether you can read, write or be notified for each characteristic. A overview of the different services and characteristics and how they are used is shown in the figure below.
+<img alt="ble-services-and-characteristics.png" src="../img/ble-services-and-characteristics.png"/></p>
+<h3 id="nrf52_1">NRF52</h3>
+<ul>
+<li><strong>Service: Human Interface Device (0x1812)</strong>
+This service was chosen because the NRF52 acts like a special kind of HID (Human Interface Device). It takes human input and makes it available to connected devices.</li>
+<li><strong>Characteristic: Plane angle (0x2763)</strong>
+This characteristic was chosen because we are looking for the plane angle to set the servo to. And we read the angle (resistance) of the potentiometer to get it. The angle is sent in degrees.<ul>
+<li><strong>Read</strong> The current angle of the potentiometer can be read.</li>
+<li><strong>Notify</strong> When the angle of the potentiometer changes connected devices can be notified.</li>
+</ul>
+</li>
+</ul>
+<h3 id="fipy_1">FiPy</h3>
+<ul>
+<li><strong>Service: Automation IO (0x1815)</strong>
+This service was chosen because we are altering the IO of the fipy.</li>
+<li><strong>Characteristic: Plane angle (0x2763)</strong>
+This was chosen because we are setting the plane angle of the servo. The angle is send and set in degrees.<ul>
+<li><strong>Read</strong> The current angle of the servo can be read.</li>
+<li><strong>Write</strong> The angle of the servo can be changed by writing a new value.</li>
+</ul>
+</li>
+</ul>
+<h3 id="android-phone_1">Android phone</h3>
+<p>The Android phone does not expose any services and characteristics. It does however read the angle of connected NRF52 peripherals and subscribes to notifications in changes to this angle. It also reads the angles of connected FiPy peripherals and writes a new angle if needed.</p>
+<h2 id="system-usage">System Usage</h2>
+<p>The following chapter will describe how the system can be used. First we descibe how each component of the system, the NRF52, FiPy and Android phone, must be prepared. Next we show how all components can be used together and how the dashboard can be used.</p>
+<h3 id="preparing-the-nrf52">Preparing the NRF52</h3>
+<p>Follow the following steps to prepare the NRF52 with the attached potentiometer to be used as a Human Interface Device.</p>
+<h4 id="bill-of-materials">Bill of materials</h4>
+<p>The following materials are needed:</p>
+<ul>
+<li>Nordic-nRF52-DK</li>
+<li>10K Ohm potentiometer</li>
+<li>3 Jumper wires male-female</li>
+</ul>
+<h4 id="connecting-the-materials">Connecting the materials</h4>
+<p>Connect the potentiometer to the NRF50 according to the following schematic. In the image below a example is shown of how these are connected.</p>
+<table>
+<thead>
+<tr>
+<th>NRF52 pin</th>
+<th>Potentiometer pin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VDD</td>
+<td>Fixed end (P1)</td>
+</tr>
+<tr>
+<td>A0</td>
+<td>Wiper (P2)</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Fixed end (P3)</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="NRF52-with-potentiometer.jpg" src="../img/NRF52-with-potentiometer.jpg"/></p>
+<h4 id="uploading-the-code">Uploading the code</h4>
+<p>Upload the code found in <a href="https://github.com/RubenSmit/wireless-communication/tree/main/nrf52">/nrf52</a> to the NRF52 using Visual Studio Code with the PlatformIO plugin.</p>
+<h3 id="preparing-the-fipy">Preparing the FiPy</h3>
+<p>Follwo the following steps to prepare the FiPy with the attached servo to be used as a Automation IO device.</p>
+<h4 id="bill-of-materials_1">Bill of materials</h4>
+<p>The following materials are needed:</p>
+<ul>
+<li>FiPy with Expansion board</li>
+<li>Servo motor</li>
+<li>5V 500mA External power supply</li>
+<li>Breadboard</li>
+<li>7 Jumper wires male-male</li>
+</ul>
+<h4 id="connecting-the-materials_1">Connecting the materials</h4>
+<p>Connect the servo to the FiPy and the power supply on the breadboard according to the following schematic. In the image below a example is shown of how these are connected.</p>
+<table>
+<thead>
+<tr>
+<th>FiPy pin</th>
+<th>Servo pin</th>
+<th>External power supply (5V 500mA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>5v</td>
+<td>Positive</td>
+</tr>
+<tr>
+<td>P23</td>
+<td>Signal</td>
+<td></td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+<td>Negative</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="fipy-with-servo.jpg" src="../img/fipy-with-servo.jpg"/></p>
+<h4 id="uploading-the-code_1">Uploading the code</h4>
+<p>Upload the code found in <a href="https://github.com/RubenSmit/wireless-communication/tree/main/fipy">/fipy</a> to the FiPy using Visual Studio Code with the Pycom plugin.</p>
+<h3 id="preparing-the-android-phone">Preparing the Android phone</h3>
+<p>To use a Android phone as central with dashboard in the system, upload the code found in <a href="https://github.com/RubenSmit/wireless-communication/tree/main/android">/android</a> to a Android phone using Android studio.</p>
+<h3 id="operation">Operation</h3>
+<p>To use the system follow the following steps:</p>
+<ol>
+<li>Make sure all peripherals are turned on and prepared correctly.</li>
+<li>Open the application on the Android phone</li>
+<li>Press the big bluetooth button in the bottom right corner. The android device will now find and connect to all available peripherals. Please grant access to bluetooth and location services if requested.</li>
+<li>A list of available peripherals and their status is shown once they are connected as can be seen in the image below.</li>
+</ol>
+<p><img alt="app-interface.png" src="../img/app-interface.png"/></p>
+<p>For each connected NRF52 a bar is shown displaying the current angle of the potentiometer. When the potentiometer is turned this bar is updated. Every connected FyPi is also shown in the list. It is possibe to set the angle of the FyPi using the slider. Using the source dropdown it is possible to connect the angle of the servo to the angle of a potentiometer. When the potentiometer is turned the angle of the servo will be matched.</p>
+<h2 id="code">Code</h2>
+<p>For every device a program has been written to enable the communication between the various components, connect the sensors and actuators and to display their status on the dashboard. Next we will explain how the code for each device works.</p>
+<h3 id="nrf52_2">NRF52</h3>
+<p>The code for the NRF52 consists of a main function and a Human Interface Device service class and can be found in <a href="https://github.com/RubenSmit/wireless-communication/tree/main/nrf52/src/main.cpp">/nrf52/src/main.cpp</a>.</p>
+<h4 id="main-function">Main function</h4>
+<p>On boot the main function is called. This function starts all services and is shown below.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">BLE</span> <span class="o">&amp;</span><span class="n">ble_interface</span> <span class="o">=</span> <span class="n">BLE</span><span class="o">::</span><span class="n">Instance</span><span class="p">();</span>
+    <span class="n">events</span><span class="o">::</span><span class="n">EventQueue</span> <span class="n">event_queue</span><span class="p">;</span>
+    <span class="n">HidService</span> <span class="n">hid_service</span><span class="p">;</span>
+    <span class="n">BLEProcess</span> <span class="n">ble_process</span><span class="p">(</span><span class="n">event_queue</span><span class="p">,</span> <span class="n">ble_interface</span><span class="p">);</span>
+
+    <span class="n">ble_process</span><span class="p">.</span><span class="n">on_init</span><span class="p">(</span><span class="n">callback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hid_service</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">HidService</span><span class="o">::</span><span class="n">start</span><span class="p">));</span>
+
+    <span class="c1">// bind the event queue to the ble interface, initialize the interface</span>
+    <span class="c1">// and start advertising</span>
+    <span class="n">ble_process</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+    <span class="c1">// Process the event queue.</span>
+    <span class="n">event_queue</span><span class="p">.</span><span class="n">dispatch_forever</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>First a instance of the ble interface and a event queue is created. Next a instance of the human interface device (HID) service is created. A bluetooth low energy process is created and the event queue and bluetooth interface are attached to it. When the bluetooth process is initiated the HID service is started. We start advertising and continue processing the event queue as long as the application is running.</p>
+<h4 id="human-interface-device-service">Human Interface Device Service</h4>
+<p>The Human Interface Device Service manages the HID service and the angle characteristic for the GATT server.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">start</span><span class="p">(</span><span class="n">BLE</span> <span class="o">&amp;</span><span class="n">ble_interface</span><span class="p">,</span> <span class="n">events</span><span class="o">::</span><span class="n">EventQueue</span> <span class="o">&amp;</span><span class="n">event_queue</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">_event_queue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">_server</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ble_interface</span><span class="p">.</span><span class="n">gattServer</span><span class="p">();</span>
+    <span class="n">_event_queue</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">event_queue</span><span class="p">;</span>
+
+    <span class="c1">// register the service</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Adding service</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">ble_error_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">_server</span><span class="o">-&gt;</span><span class="n">addService</span><span class="p">(</span><span class="n">_hid_service</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Error %u during service registration.</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// read write handler</span>
+    <span class="n">_server</span><span class="o">-&gt;</span><span class="n">onDataSent</span><span class="p">(</span><span class="n">as_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Self</span><span class="o">::</span><span class="n">when_data_sent</span><span class="p">));</span>
+    <span class="n">_server</span><span class="o">-&gt;</span><span class="n">onDataRead</span><span class="p">(</span><span class="n">as_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Self</span><span class="o">::</span><span class="n">when_data_read</span><span class="p">));</span>
+
+    <span class="c1">// updates subscribtion handlers</span>
+    <span class="n">_server</span><span class="o">-&gt;</span><span class="n">onUpdatesEnabled</span><span class="p">(</span><span class="n">as_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Self</span><span class="o">::</span><span class="n">when_update_enabled</span><span class="p">));</span>
+    <span class="n">_server</span><span class="o">-&gt;</span><span class="n">onUpdatesDisabled</span><span class="p">(</span><span class="n">as_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Self</span><span class="o">::</span><span class="n">when_update_disabled</span><span class="p">));</span>
+
+    <span class="c1">// print the handles</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"human interface device service registered</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"service handle: %u</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">_hid_service</span><span class="p">.</span><span class="n">getHandle</span><span class="p">());</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\a</span><span class="s">ngle characteristic value handle %u</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">_angle_char</span><span class="p">.</span><span class="n">getValueHandle</span><span class="p">());</span>
+
+    <span class="n">_event_queue</span><span class="o">-&gt;</span><span class="n">call_every</span><span class="p">(</span><span class="mi">1000</span> <span class="cm">/* ms */</span><span class="p">,</span> <span class="n">callback</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Self</span><span class="o">::</span><span class="n">read_angle</span><span class="p">));</span>
+    <span class="n">_event_queue</span><span class="o">-&gt;</span><span class="n">call_every</span><span class="p">(</span><span class="mi">1000</span> <span class="cm">/* ms */</span><span class="p">,</span> <span class="n">callback</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Self</span><span class="o">::</span><span class="n">blink_led</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When the service is started it registers the hid service to the GATT server. Next it registers the handlers for sending and reading data and enabling and disabling of updates. Two events are added to the event queue to be run every second, reading the angle of the potentiometer and blinking the heartbeat led.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">read_angle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">angle</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span> <span class="n">map</span><span class="p">(</span><span class="n">_angle_sensor</span><span class="p">.</span><span class="n">read</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"read angle as %i</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">angle</span><span class="p">);</span>
+
+    <span class="n">ble_error_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">_angle_char</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="o">*</span><span class="n">_server</span><span class="p">,</span> <span class="n">angle</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"write of the angle value returned error %u</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>After reading the angle it is mapped to a value of 0 to 180 degrees. Then the angle characteristic is updated with the new angle and any subscribers are notified.</p>
+<h3 id="fipy_2">FiPy</h3>
+<p>The code for the FiPy can be found in <a href="https://github.com/RubenSmit/wireless-communication/tree/main/fipy/main.py">/fipy/main.py</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">bluetooth</span> <span class="o">=</span> <span class="n">Bluetooth</span><span class="p">()</span> <span class="c1"># Get a bluetooth instance</span>
+<span class="n">bluetooth</span><span class="o">.</span><span class="n">set_advertisement</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'FyPi'</span><span class="p">)</span> <span class="c1"># Set the name</span>
+<span class="n">bluetooth</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">trigger</span><span class="o">=</span><span class="n">Bluetooth</span><span class="o">.</span><span class="n">CLIENT_CONNECTED</span> <span class="o">|</span> <span class="n">Bluetooth</span><span class="o">.</span><span class="n">CLIENT_DISCONNECTED</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">conn_cb</span><span class="p">)</span> <span class="c1"># set up the callbacks for connect and disconnect events</span>
+<span class="n">bluetooth</span><span class="o">.</span><span class="n">advertise</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># advertise the device</span>
+</code></pre></div>
+<p>When the FiPy is booted a bluetooth instance is created and prepared for advertisement and started. Also connection and disconnection callbacks are added.</p>
+<div class="highlight"><pre><span></span><code><span class="n">srv1</span> <span class="o">=</span> <span class="n">bluetooth</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="mh">0x1815</span> <span class="p">,</span> <span class="n">isprimary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># set up the service to display the current angle of the servo</span>
+<span class="n">chr1</span> <span class="o">=</span> <span class="n">srv1</span><span class="o">.</span><span class="n">characteristic</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="mh">0x2763</span> <span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">currentAngle</span><span class="p">)</span> <span class="c1"># set up the characteristic to get the server angle </span>
+<span class="n">char1_cb</span> <span class="o">=</span> <span class="n">chr1</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">trigger</span><span class="o">=</span><span class="n">Bluetooth</span><span class="o">.</span><span class="n">CHAR_WRITE_EVENT</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">char1_cb_handler</span><span class="p">)</span> <span class="c1"># set up the callback when writen to characteristic</span>
+</code></pre></div>
+<p>Next the Automation IO service is created and a angle characteristic is added to the service. A callback is created to handle write events to the angle characteristic.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pwm</span> <span class="o">=</span> <span class="n">PWM</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># make a pwm provider</span>
+<span class="n">servo</span> <span class="o">=</span> <span class="n">pwm</span><span class="o">.</span><span class="n">channel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pin</span><span class="o">=</span><span class="s1">'P23'</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="c1"># Setup the pwm for the servo</span>
+<span class="n">setServoPwn</span><span class="p">(</span><span class="n">currentAngle</span><span class="p">)</span> <span class="c1"># Set the servo the the initial angle</span>
+</code></pre></div>
+<p>Finally a Pulse With Modulation (PWM) provider is created with a channel to control the servo. The correct pwm value is determined for the current angle and the servo is moved to the initial angle.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">char1_cb_handler</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> 
+    <span class="n">events</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">data</span> <span class="c1"># store the events and data</span>
+    <span class="k">if</span>  <span class="n">events</span> <span class="o">&amp;</span> <span class="n">Bluetooth</span><span class="o">.</span><span class="n">CHAR_WRITE_EVENT</span><span class="p">:</span> <span class="c1"># if the event was a write event</span>
+        <span class="n">currentAngle</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"big"</span><span class="p">)</span> <span class="c1"># get the value from the payload</span>
+        <span class="n">setServoPwn</span><span class="p">(</span><span class="n">currentAngle</span><span class="p">)</span> <span class="c1"># set the servo to the right position</span>
+        <span class="n">chr1</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">currentAngle</span><span class="p">)</span> <span class="c1"># update the value that is displayed over Bluetooth</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Set new angle: "</span><span class="p">,</span> <span class="n">currentAngle</span><span class="p">)</span>
+</code></pre></div>
+<p>When a write event occurs for the angle characteristic it is handled by the event handler. The new angle is read from the payload and stored. A new pwm value for the servo is calculated and the servo is moved to the right position. Finally the characteristic is updated with the new angle value.</p>
+<h3 id="android">Android</h3>
+<p>The android application consists of several components. First a global overview will be given of these components and their relation. Next each component will be described in detail. The components of the application are:</p>
+<ul>
+<li><strong>Main Activity</strong> Is started when the application boots. It initializes all other components of the application and manages the bluetooth connections and scanning.</li>
+<li><strong>Device Model</strong> Stores all information about and handles the communication with a single peripheral.</li>
+<li><strong>Bluetooth Devices Provider</strong> Stores and manages a list of all connected peripherals.</li>
+<li><strong>Bluetooth Devices List Adapter</strong> Handles the displaying of the list of connected peripherals.</li>
+</ul>
+<p>When the Main Activity is started and the bluetooth connection button is pressed the Android phone will start scanning for available peripherals. Once a peripheral is found a Device Model is created for the peripheral and stored in the Bluetooth Devices Provider.</p>
+<p>The Main Activity will supply the Bluetooth Devices List Adapter with the list of devices to be displayed. When a new device is found the Main Activity will notify the List Adapter of the change. When a property of a device changes it wil notify the Main Activity which in turn will notify the List Adapter. In this way all changes to the devices will be displayed in the list.</p>
+<h4 id="main-activity">Main Activity</h4>
+<p>When the Main Activity is started the <code>onCreate</code> method is called. It contains the following code.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Initializes Bluetooth adapter.</span>
+<span class="kd">final</span> <span class="n">BluetoothManager</span> <span class="n">bluetoothManager</span> <span class="o">=</span>
+        <span class="p">(</span><span class="n">BluetoothManager</span><span class="p">)</span> <span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="na">BLUETOOTH_SERVICE</span><span class="p">);</span>
+<span class="n">bluetoothAdapter</span> <span class="o">=</span> <span class="n">bluetoothManager</span><span class="p">.</span><span class="na">getAdapter</span><span class="p">();</span>
+
+<span class="c1">// Ensures Bluetooth is available on the device and it is enabled. If not,</span>
+<span class="c1">// displays a dialog requesting user permission to enable Bluetooth.</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">bluetoothAdapter</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">bluetoothAdapter</span><span class="p">.</span><span class="na">isEnabled</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">Intent</span> <span class="n">enableBtIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="p">(</span><span class="n">BluetoothAdapter</span><span class="p">.</span><span class="na">ACTION_REQUEST_ENABLE</span><span class="p">);</span>
+    <span class="n">startActivityForResult</span><span class="p">(</span><span class="n">enableBtIntent</span><span class="p">,</span> <span class="n">REQUEST_ENABLE_BT</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">bluetoothDevicesListAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BluetoothDevicesListAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+<span class="n">FloatingActionButton</span> <span class="n">fab</span> <span class="o">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">fab</span><span class="p">);</span>
+<span class="n">fab</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="p">(</span><span class="k">new</span> <span class="n">View</span><span class="p">.</span><span class="na">OnClickListener</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="p">(</span><span class="n">View</span> <span class="n">view</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">scanLeDevice</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>In it the Bluetooth manager and adapter are initialized. We ensure bluetooth is enabled and permission is given to use the bluetooth services. Next the List Adapter is initialized for displaying the list of connected peripherals. A listner is created for the floating action button that, when the button is pressed, starts scanning for bluetooth devices.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">scanLeDevice</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Started scanning for devices"</span><span class="p">);</span>
+    <span class="n">BluetoothDevicesProvider</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">mScanning</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Stops scanning after a pre-defined scan period.</span>
+        <span class="n">handler</span><span class="p">.</span><span class="na">postDelayed</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">mScanning</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="n">bluetoothLeScanner</span><span class="p">.</span><span class="na">stopScan</span><span class="p">(</span><span class="n">leScanCallback</span><span class="p">);</span>
+                <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Stopped scanning for devices"</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span> <span class="n">SCAN_PERIOD</span><span class="p">);</span>
+
+        <span class="c1">// Scan for devices matching the filter and use the callback for found devices</span>
+        <span class="n">mScanning</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">ScanFilter</span><span class="o">&gt;</span> <span class="n">filters</span> <span class="o">=</span> <span class="n">deviceFilters</span><span class="p">();</span>
+        <span class="n">ScanSettings</span> <span class="n">settings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ScanSettings</span><span class="p">.</span><span class="na">Builder</span><span class="p">().</span><span class="na">setScanMode</span><span class="p">(</span><span class="n">ScanSettings</span><span class="p">.</span><span class="na">SCAN_MODE_LOW_LATENCY</span><span class="p">).</span><span class="na">build</span><span class="p">();</span>
+        <span class="n">bluetoothLeScanner</span><span class="p">.</span><span class="na">startScan</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">leScanCallback</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Stop scanning if the button is pressed again</span>
+        <span class="n">mScanning</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="n">bluetoothLeScanner</span><span class="p">.</span><span class="na">stopScan</span><span class="p">(</span><span class="n">leScanCallback</span><span class="p">);</span>
+        <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Stopped scanning for devices"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When the scanning is started a delayed handler is created that will stop the scanning after a predefined period. A filter is applied to the scanner to only return NRF52 and FiPy devices. Also a callback is defined to handle any found devices.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="n">ScanCallback</span> <span class="n">leScanCallback</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">ScanCallback</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onScanResult</span><span class="p">(</span><span class="kt">int</span> <span class="n">callbackType</span><span class="p">,</span> <span class="n">ScanResult</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Get the bluetooth device</span>
+                <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Found a bluetooth device!"</span><span class="p">);</span>
+                <span class="kd">super</span><span class="p">.</span><span class="na">onScanResult</span><span class="p">(</span><span class="n">callbackType</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+                <span class="n">BluetoothDevice</span> <span class="n">bluetoothDevice</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="na">getDevice</span><span class="p">();</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">BluetoothDevicesProvider</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">bluetoothDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">()))</span> <span class="p">{</span>
+                    <span class="c1">// Add the device to the list and observe it</span>
+                    <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Adding new device to list"</span><span class="p">);</span>
+                    <span class="n">Device</span> <span class="n">device</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Device</span><span class="p">(</span><span class="n">bluetoothDevice</span><span class="p">,</span> <span class="n">getContext</span><span class="p">());</span>
+                    <span class="n">BluetoothDevicesProvider</span><span class="p">.</span><span class="na">addDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+                    <span class="n">device</span><span class="p">.</span><span class="na">addObserver</span><span class="p">(</span><span class="n">getObserver</span><span class="p">());</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+</code></pre></div>
+<p>The scan callback creates a Device model for each found device and adds it to the Bluetooth Devices Provider. Also the Main Activity is adde as a observer to the Device model.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="n">Observable</span> <span class="n">observable</span><span class="p">,</span> <span class="n">Object</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">runOnUiThread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">BluetoothDevicesProvider</span><span class="p">.</span><span class="na">deviceList</span><span class="p">.</span><span class="na">indexOf</span><span class="p">((</span><span class="n">Device</span><span class="p">)</span> <span class="n">observable</span><span class="p">);</span>
+            <span class="n">bluetoothDevicesListAdapter</span><span class="p">.</span><span class="na">notifyItemChanged</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When there are changes to a Device model the Main Activity, as observer, is notified. Consequently it will start a runner on the UI thread to notify the List Adapter about changes to the item.</p>
+<h4 id="device-model">Device Model</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="nf">Device</span><span class="p">(</span><span class="n">BluetoothDevice</span> <span class="n">bluetoothDevice</span><span class="p">,</span> <span class="n">Context</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">device</span> <span class="o">=</span> <span class="n">bluetoothDevice</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">context</span> <span class="o">=</span> <span class="n">context</span><span class="p">;</span>
+
+    <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Attempt connecting to gatt service."</span><span class="p">);</span>
+    <span class="n">bluetoothGatt</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="na">connectGatt</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="n">gattCallback</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When created the Device model stores the bluetooth device and attempts to connect to the gatt service of the device. The gatt callback handles the events that emanate from the gatt service. The following events are handled:</p>
+<ul>
+<li><strong>onConnectionStateChange</strong> When the connection state is changed is is stored and all observers are notified and a attempt is made to discover the services.</li>
+<li><strong>onServicesDiscovered</strong> When services are discovered a attempt is made to determine the service type.</li>
+<li><strong>onCharacteristicChanged</strong> When a notification is recieved that a characteristich has changed a attempt is made to read the characteristic.</li>
+<li><strong>onCharacteristicRead</strong> When the angle characteristic is read the format of the data is determined and the angle is stored.</li>
+<li><strong>onCharacteristicWrite</strong> When a characteristic is successfully written this is logged.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setServiceType</span><span class="p">(</span><span class="n">BluetoothGatt</span> <span class="n">gatt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">BluetoothGattService</span> <span class="n">service</span><span class="p">:</span> <span class="n">gatt</span><span class="p">.</span><span class="na">getServices</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">UUID</span> <span class="n">uuid</span> <span class="o">=</span> <span class="n">service</span><span class="p">.</span><span class="na">getUuid</span><span class="p">();</span>
+        <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Found service: "</span> <span class="o">+</span> <span class="n">uuid</span> <span class="o">+</span> <span class="s">" for device: "</span> <span class="o">+</span> <span class="n">device</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">UUID_HUMAN_INTERFACE_DEVICE_SERVICE</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// If the device is a sensor, subscribe to new sensor data</span>
+            <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"This is a sensor!"</span><span class="p">);</span>
+            <span class="n">deviceType</span> <span class="o">=</span> <span class="n">TYPE_SENSOR</span><span class="p">;</span>
+            <span class="n">subscribeToSensorData</span><span class="p">(</span><span class="n">service</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">UUID_GENERIC_ATTRIBUTE_SERVICE</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"This is a servo!"</span><span class="p">);</span>
+            <span class="n">deviceType</span> <span class="o">=</span> <span class="n">TYPE_SERVO</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When a service is detected it is matched against the sensor and servo service UUIDs. When a match is found the device type is stored. For sensors a attempt is made to subscribe to the sensor data.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">subscribeToSensorData</span><span class="p">(</span><span class="n">BluetoothGattService</span> <span class="n">service</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">BluetoothGattCharacteristic</span> <span class="n">characteristic</span><span class="p">:</span> <span class="n">service</span><span class="p">.</span><span class="na">getCharacteristics</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Found characteristic: "</span> <span class="o">+</span> <span class="n">characteristic</span><span class="p">.</span><span class="na">getUuid</span><span class="p">()</span> <span class="o">+</span> <span class="s">" for device: "</span> <span class="o">+</span> <span class="n">device</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">BluetoothGattCharacteristic</span> <span class="n">characteristic</span> <span class="o">=</span> <span class="n">service</span><span class="p">.</span><span class="na">getCharacteristic</span><span class="p">(</span><span class="n">UUID_PLANE_ANGLE_CHARACTERISTIC</span><span class="p">);</span>
+    <span class="n">bluetoothGatt</span><span class="p">.</span><span class="na">setCharacteristicNotification</span><span class="p">(</span><span class="n">characteristic</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="n">BluetoothGattDescriptor</span> <span class="n">descriptor</span> <span class="o">=</span> <span class="n">characteristic</span><span class="p">.</span><span class="na">getDescriptor</span><span class="p">(</span><span class="n">CLIENT_CHARACTERISTIC_CONFIG</span><span class="p">);</span>
+    <span class="n">descriptor</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">BluetoothGattDescriptor</span><span class="p">.</span><span class="na">ENABLE_NOTIFICATION_VALUE</span><span class="p">);</span>
+    <span class="n">bluetoothGatt</span><span class="p">.</span><span class="na">writeDescriptor</span><span class="p">(</span><span class="n">descriptor</span><span class="p">);</span>
+
+    <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Subscribed to sensor characteristic: "</span> <span class="o">+</span> <span class="n">characteristic</span><span class="p">);</span>
+
+    <span class="n">bluetoothGatt</span><span class="p">.</span><span class="na">readCharacteristic</span><span class="p">(</span><span class="n">characteristic</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When subscribing to the sensor data the angle characteristic is retrieved and the bluetooth gatt server of the android phone is instructed to subscribe to notifications for the characteristic. Next a attempt is made to read the angle characteristic.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setAngle</span><span class="p">(</span><span class="kt">int</span> <span class="n">angle</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">angle</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="na">angle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
+        <span class="n">setChanged</span><span class="p">();</span>
+        <span class="n">notifyObservers</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When a new angle is stored and it differs from the previous angle, the observers of the Device model are notified.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">writeAngle</span><span class="p">(</span><span class="kt">int</span> <span class="n">angle</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">notify</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">angle</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="na">angle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">angle</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">notify</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">setChanged</span><span class="p">();</span>
+            <span class="n">notifyObservers</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span> <span class="s">"Set angle to: "</span> <span class="o">+</span> <span class="n">angle</span><span class="p">);</span>
+
+        <span class="n">BluetoothGattService</span> <span class="n">service</span> <span class="o">=</span> <span class="n">bluetoothGatt</span><span class="p">.</span><span class="na">getService</span><span class="p">(</span><span class="n">UUID_GENERIC_ATTRIBUTE_SERVICE</span><span class="p">);</span>
+        <span class="n">BluetoothGattCharacteristic</span> <span class="n">characteristic</span> <span class="o">=</span> <span class="n">service</span><span class="p">.</span><span class="na">getCharacteristic</span><span class="p">(</span><span class="n">UUID_PLANE_ANGLE_CHARACTERISTIC</span><span class="p">);</span>
+        <span class="n">characteristic</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">BluetoothGattCharacteristic</span><span class="p">.</span><span class="na">FORMAT_UINT8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">bluetoothGatt</span><span class="p">.</span><span class="na">writeCharacteristic</span><span class="p">(</span><span class="n">characteristic</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When a new angle is written to a Device model a attempt is made to write it to the characteristic. If specified the observers of the model are notified of the change.</p>
+<h4 id="bluetooth-devices-provider">Bluetooth Devices Provider</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">deviceList</span><span class="p">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Device</span><span class="o">&gt;</span> <span class="n">deviceMap</span><span class="p">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">BluetoothDevicesListAdapter</span> <span class="n">adapter</span><span class="p">;</span>
+</code></pre></div>
+<p>The BluetoothDevicesProvider maintains a list of all connected devices. It also stores the instance of the devices list adapter that displays the list of devices so it can notify the adapter of any changes to the list.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addDevice</span><span class="p">(</span><span class="n">Device</span> <span class="n">device</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">contains</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">getDeviceAddress</span><span class="p">()))</span> <span class="p">{</span>
+        <span class="n">deviceList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+        <span class="n">deviceMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">getDeviceAddress</span><span class="p">(),</span> <span class="n">device</span><span class="p">);</span>
+        <span class="n">adapter</span><span class="p">.</span><span class="na">notifyDataSetChanged</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>New devices can be added to the list and the adapter will be notified of the change.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">clear</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">Device</span> <span class="n">device</span><span class="p">:</span> <span class="n">deviceList</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">device</span><span class="p">.</span><span class="na">disconnect</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">deviceList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+    <span class="n">deviceMap</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+    <span class="n">adapter</span><span class="p">.</span><span class="na">notifyDataSetChanged</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When the list with devices must be cleared each device is disconnected and the lists are cleared. The adapter is notified of the changes to the list.</p>
+<h4 id="bluetooth-devices-list-adapter">Bluetooth Devices List Adapter</h4>
+<p>The list adapter displays a list containing three kinds of devices:</p>
+<ul>
+<li>Unknown devices where the service type is not yet determined.</li>
+<li>Sensor devices with a Human Interface Device service.</li>
+<li>Servo devices with a Automation IO service.</li>
+</ul>
+<p>Each device type has its own view and view binder. In the <code>onCreateViewHolder</code> and <code>onBindViewHolder</code> functions the correct view and binder are determined.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemViewType</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Device</span> <span class="n">device</span> <span class="o">=</span> <span class="n">BluetoothDevicesProvider</span><span class="p">.</span><span class="na">deviceList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">position</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">getDeviceType</span><span class="p">()</span> <span class="o">==</span> <span class="n">SENSOR</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">SENSOR</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">getDeviceType</span><span class="p">()</span> <span class="o">==</span> <span class="n">SERVO</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">SERVO</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">UNKNOWN</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The view type is determined for the current list position by getting the device from the devices provider and matching the type.</p>
+<h5 id="servo-view">Servo View</h5>
+<p>The servo view contains a seekbar to change the angle of the servo and a dropdown to select the source of the angle.</p>
+<div class="highlight"><pre><span></span><code><span class="n">holder</span><span class="p">.</span><span class="na">sbAngle</span><span class="p">.</span><span class="na">setOnSeekBarChangeListener</span><span class="p">(</span><span class="k">new</span> <span class="n">SeekBar</span><span class="p">.</span><span class="na">OnSeekBarChangeListener</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onProgressChanged</span><span class="p">(</span><span class="n">SeekBar</span> <span class="n">seekBar</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">device</span><span class="p">.</span><span class="na">usesSource</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">device</span><span class="p">.</span><span class="na">writeAngle</span><span class="p">(</span><span class="n">seekBar</span><span class="p">.</span><span class="na">getProgress</span><span class="p">(),</span> <span class="kc">false</span><span class="p">);</span>
+            <span class="n">holder</span><span class="p">.</span><span class="na">tvAngle</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">seekBar</span><span class="p">.</span><span class="na">getProgress</span><span class="p">()));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>The <code>OnSeekBarChangeListener</code> writes a new angle to the device when the position of the seekbar is changed.</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">sources</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">sources</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">Device</span> <span class="n">sourceDevice</span><span class="p">:</span> <span class="n">BluetoothDevicesProvider</span><span class="p">.</span><span class="na">deviceList</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">sourceDevice</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">sourceDevice</span><span class="p">.</span><span class="na">getDeviceType</span><span class="p">()</span> <span class="o">==</span> <span class="n">SENSOR</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sources</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sourceDevice</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">ArrayAdapter</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">spinnerAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayAdapter</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">source_list_item</span><span class="p">,</span> <span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tvSourceName</span><span class="p">,</span> <span class="n">sources</span><span class="p">.</span><span class="na">toArray</span><span class="p">());</span>
+<span class="n">holder</span><span class="p">.</span><span class="na">spSource</span><span class="p">.</span><span class="na">setAdapter</span><span class="p">(</span><span class="n">spinnerAdapter</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">usesSource</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">holder</span><span class="p">.</span><span class="na">spSource</span><span class="p">.</span><span class="na">setSelection</span><span class="p">(</span><span class="n">sources</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">getSource</span><span class="p">()));</span>
+<span class="p">}</span>
+
+<span class="n">holder</span><span class="p">.</span><span class="na">spSource</span><span class="p">.</span><span class="na">setOnItemSelectedListener</span><span class="p">(</span><span class="k">new</span> <span class="n">AdapterView</span><span class="p">.</span><span class="na">OnItemSelectedListener</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onItemSelected</span><span class="p">(</span><span class="n">AdapterView</span><span class="o">&lt;?&gt;</span> <span class="n">adapterView</span><span class="p">,</span> <span class="n">View</span> <span class="n">view</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">long</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Device</span> <span class="n">source</span> <span class="o">=</span> <span class="n">sources</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">device</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">device</span><span class="p">.</span><span class="na">unsetSource</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">device</span><span class="p">.</span><span class="na">setSource</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>A list of available sources is created by getting all devices from the device provider and filtering them on device type. For each available source a dropdown item is created. The currently used source is pre-selected in the dropdown. When a item in the dropdown is selected the <code>OnItemSelectedListener</code> handles the event and sets the new source for the servo device.</p>
+<h2 id="tests">Tests</h2>
+<p>Three tests where preformed to validate the system.</p>
+<h3 id="potentiometer-rotation-test">Potentiometer rotation test</h3>
+<p>For this test a Sensor peripheral and a Android phone running the application where used. The goal of the test was to determine if the angle of the potentiomenter on the peripheral was correctly displayed on the dashboard. Also tested was if the angle of the potentiometer was changed the dashboard was updated with the new angle in a timely manner.</p>
+<p>The test proved to be successfull. The angle displayed on the dashboard matched the angle of the potentiometer and changes in the angle of the potentiometer where displayed correctly on the dashboard within a second.</p>
+<h3 id="servo-rotation-test">Servo rotation test</h3>
+<p>This test was preformed using a Servo peripheral and a Android phone running the application. The goal of the test was to determine if the angle of the servo matched the setting on the dashboard. Also tested was if the angle of the servo changed according to the input on the dashboard.</p>
+<p>The test was successfull. The angle displayed matched the angle of the servo and when the angle was changed on the dashboard the servo quickly rotated to the new angle.</p>
+<h3 id="combined-rotation-test">Combined rotation test</h3>
+<p>During this test both a Sensor and Servo peripheral where used, as well as a Android phone running the application. The goal was to test if the angle of the servo would match the angle of the potentiometer when the sensor was selected as source for the servo on the dashboard.</p>
+<p>It was possible to link the angle of the servo to the angle of the potentiometer during the tests. The tests where therefore successfull.</p>
+<h2 id="demonstrations">Demonstrations</h2>
+<p>The following video's demonstrate the working system in several ways:</p>
+<ul>
+<li><strong>Full app demonstration</strong> <a href="../mp4/app-demo.mp4">app-demo.mp4</a> displaying connecting sensors and servo's, displaying changes in angle of the sensor, changing the angle of the servo and linking the angle of the sensor to the servo.</li>
+<li><strong>Fipy with phone demonstration</strong> <a href="../mp4/fipy-with-phone-demo.mp4">fipy-with-phone-demo.mp4</a> displaying controlling the angle of the servo using the app.</li>
+<li><strong>NRF52 with phone demonstration</strong> <a href="../mp4/NRF52-with-phone-demo.mp4">NRF52-with-phone-demo.mp4</a> displaying changing the angle of the potentiometer and displaying the changes in the app.</li>
+</ul>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a class="md-footer__link md-footer__link--prev" href=".." rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Vorige
+              </span>
+              Introduction
+            </div>
+</div>
+</a>
+<a class="md-footer__link md-footer__link--next" href="../theory/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Volgende
+              </span>
+              Theory
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 Ruben Smit, Willem Dekker
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+ ... <a class="link--pdf-download" download href="../pdf/Wireless-communication-Willem-Dekker-Ruben-Smit.pdf" title="PDF">download PDF</a></div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Kopi\u00ebren naar klembord", "clipboard.copied": "Gekopieerd naar klembord", "search.config.lang": "nl", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Zoeken", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+<script src="../assets/javascripts/bundle.d892486b.min.js"></script>
+</body>
+</html>
