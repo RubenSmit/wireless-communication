@@ -62,7 +62,7 @@ plugins:
         #render_js: true
         #headless_chrome_path: headless-chromium
         #
-        #output_path: any-place/document.pdf
+        output_path: pdf/Wireless-communication-Willem-Dekker-Ruben-Smit.pdf
         #enabled_if_env: ENABLE_PDF_EXPORT
         #
         #debug_html: true
