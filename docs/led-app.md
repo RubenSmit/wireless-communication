@@ -27,10 +27,9 @@ something like this:
 | Packet data | 0x00 | 0x01    | 0x01        |
 | Values      | 0    | 1       | 1           |
 
-So, this packet tells you need to go back one pin and the current pin is 1. So,
-a packet containing 0x010003 would be go to next pin current pin is 3.
+So, this packet tells you need to go back one pin and the current pin is 1. So, a packet containing 0x010003 would be go to next pin current pin is 3. This way the minimal amount of data is send over the air.
 
-## Communication beween the boards
+## Communication between the boards
 
 The boards would send a package described above to the other board and increment or decretent the pointer value
 given in the packet this packet would sync the boards if there was a discrepancy between them. This is shown in the picture below.
@@ -39,6 +38,24 @@ given in the packet this packet would sync the boards if there was a discrepancy
 
 ## Implementation
 
-During the implementation of this project, we stumbled on a few roadblocks the code that was provided in the assignment was out of date and would not compile a few days where spend on trying to get this code to work and we did not get it running. We have tried platform IO to compile it the browser-based IDE and their own IDE but the sample code did not work. Then we tried working with the MCP23508 and while we could get LEDs to light up. After a few nights work we did not get the interrupts working not on the Nucleo or on a Arduino UNO which was used for sanity checking our way of thinking. We also ran into the issue with the interrupts during the microcontrollers course. Where we did not get the interrupts to work.
+During the implementation of this project, we stumbled on a few roadblocks the code that was provided in the assignment was out of date and would not compile a few days where spend on trying to get this code to work and we did not get it running. We have tried platformIO to compile it the browser-based IDE and their own IDE but the sample code did not work. Then we tried working with the MCP23508 and while we could get LEDs to light up. After a few nights work we did not get the interrupts working not on the Nucleo or on a Arduino UNO which was used for sanity checking our way of thinking. We even after consulting the documentation of the MCP we did not get it to work. We beleave  some adress asighment did not go right or wat not interperted right. The configuration was:
 
-During the implementation for the radio communication, we did not get any communication with the radios via the STM. We tried example code, tried different radios we had some new ones laying around. All with no luck we know the radios were in working condition since we tested them with an Arduino before and the communication worked there. We decided to keep working on this while we started work on the other assignment. This so if we get it working on the other assignment, we could use this knowledge to fix the problems we were facing here.
+| Register | Address | Value | binary    |
+|----------|---------|-------|-----------|
+| IODIR    | 0x00    | 0xc0  | 1100 0000 |
+| IPOL     | 0x01    | 0x00  | 0000 0000 |
+| GPINTEN  | 0x02    | 0xc0  | 1100 0000 |
+| DEFVAL   | 0x03    | 0xc0  | 1100 0000 |
+| INTCON   | 0x04    | 0xc0  | 1100 0000 |
+| IOCON    | 0x05    | 0x0A  | 0000 1010 |
+| GPPU     | 0x06    | 0xC0  | 1100 0000 |
+| INTF     | 0x07    | 0x00  | 0000 0000 |
+| INTCAP   | 0x08    | 0x00  | 0000 0000 |
+| GPIO     | 0x09    | 0x00  | 0000 0000 |
+| OLAT     | 0x0A    | 0x00  | 0000 0000 |
+
+We also ran into the issue with the interrupts during the microcontrollers course. Where we did not get the interrupts to work.
+
+During the implementation for the radio communication, we did not get any communication with the radios via the STM. We tried example code, tried different radios we had some new ones laying around. All with no luck we know the radios were in working condition since we tested them with an Arduino before and the communication worked there. We decided to keep working on this while we started work on the other assignment. This so if we get it working on the other assignment, we could use this knowledge to fix the problems we were facing here. 
+
+In the end we did not  succseed in getting te communication working between the two devices.
