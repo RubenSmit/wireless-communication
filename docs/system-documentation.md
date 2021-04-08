@@ -1,17 +1,56 @@
-# System documentation
+# System documentation - High level Radio
+This documentation describes our high level radio project in which we demonstrate Bluetooth Low Energy (BLE) communication between three different devices. First we will describe the goal of our system. Next the roles of the different devices are described followed by the services and characteristics used in the BLE communciation. We also note how to use the system and the inner workings of the code is explained. Finally some demonstrations of the working system are shown and how we tested the system.
+
+## System Goal
+The goal of this system is to send the current angle of a potentiometer to an android application where it is displayed on a dashboard. From this dashboard it should be possible to control the angle of a servo motor, the angle of the servo should be shown on the dashboard. It should also be possible to link the angle of the servo motor to the angle of the potentiometer.
+
+## Roles of of the Devices
+The system will consist of three devices: a NRF52, a Android phone and a FiPy. Each of these devices will have a different role and task in the system which will be described below.
+
+### NRF52
+The NRF52 will act as a BLE Peripheral. A potentiometer will be attached to the NRF52 and the angle of this potentiometer can be read by a connected central.
+
+### FiPy
+The FiPy will also act as a BLE Peripheral. It will be attached to a servo and the current angle of this servo can be read by a connected central. It will also be possible to set a new angle for the servo.
+
+### Android phone
+On the android phone a appplication will run that displays a dashboard. It will function as a BLE central and connect to NRF52 and FiPy peripherals. It wil read the angle of the potentiometers of connected NRF52 peripherals and display those on the dashboard. When the angle of a potentiometer changes the dashboard is updated. The current angle of the servos of connected FiPy peripherals is also displayed. Using the dashboard the angle of the servos can be changed.
+
+## Services and Characteristics
+
+### NRF52
+- Service: Human Interface Device (0x1812)
+This service was chosen because the NRF52 acts like a special kind of HID (Human Interface Device). It takes human input and sends it to the master. 
+- Characteristic: Plane angle (0x2763)
+This characteristic was chosen because we are looking for the plane angle to set the servo to. And we read the angle (resistance) of the potentiometer to get it.
+
+### Android phone
+- Service: 
+- Characteristic:
+
+### FiPy
+- Service: Automation IO (0x1815)
+This service was chosen because we are altering the IO of the fipy
+- Characteristic: Plane angle (0x2763)
+This was chosen because we are setting the plane angle of the servo. 
+
+
+## System Usage
 The system consists of 3 devices.
 
   - A android phone running the android progam in [/android](https://github.com/RubenSmit/wireless-communication/tree/main/android).
   - A nrf52 with a attached potentiometer (10k on pin A0) running the program in [/nrf52](https://github.com/RubenSmit/wireless-communication/tree/main/nrf52).
   - A FiPy with a attached servo (on pin P23) running the program in [/fipy](https://github.com/RubenSmit/wireless-communication/tree/main/fipy).
 
-## NRF52 connections
+#### NRF52 connections
 ![NRF52-with-potentiometer.jpg](NRF52-with-potentiometer.jpg)
 
-## FiPy connections
+#### FiPy connections
 ![fipy-with-servo.jpg](fipy-with-servo.jpg)
 
-## Demos
+## Code
+
+## Demonstrations and tests
 ### Full app demo
 [app-demo.mp4](app-demo.mp4)
 

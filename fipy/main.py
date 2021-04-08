@@ -39,7 +39,7 @@ bluetooth.advertise(True)
 
 print("Started BLE")
 
-srv1 = bluetooth.service(uuid=0x1843 , isprimary=True)
+srv1 = bluetooth.service(uuid=0x1815 , isprimary=True)
 chr1 = srv1.characteristic(uuid=0x2763 , value=currentAngle)
 char1_cb = chr1.callback(trigger=Bluetooth.CHAR_WRITE_EVENT, handler=char1_cb_handler)
 
