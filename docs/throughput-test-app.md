@@ -26,7 +26,7 @@ One of the Nucleos will act as the transmitter, the other as the reciever. The t
 
 ## Results
 
-Due to problems with using the NRF24L01+ on a Nucleo we where unable to complete this assignment and get any results.
+Due to problems with using the NRF24L01+ on a Nucleo we where unable to complete this assignment and get any results. Please see [the implementation of the LED app chapter](https://rubensmit.github.io/wireless-communication/led-app/#implementation) for a more detailed description of the problems we faced and our attempts to overcome these.
 
 ## Conclusion
 

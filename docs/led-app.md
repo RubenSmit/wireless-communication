@@ -38,7 +38,7 @@ given in the packet this packet would sync the boards if there was a discrepancy
 
 ## Implementation
 
-During the implementation of this project, we stumbled on a few roadblocks the code that was provided in the assignment was out of date and would not compile a few days where spend on trying to get this code to work and we did not get it running. We have tried platformIO to compile it the browser-based IDE and their own IDE but the sample code did not work. Then we tried working with the MCP23508 and while we could get LEDs to light up. After a few nights work we did not get the interrupts working not on the Nucleo or on a Arduino UNO which was used for sanity checking our way of thinking. We even after consulting the documentation of the MCP we did not get it to work. We beleave  some adress asighment did not go right or wat not interperted right. The configuration was:
+During the implementation of this project, we stumbled on a few roadblocks. The code that was provided in the assignment was out of date and would not compile a few days where spend on trying to get this code to work and we did not get it running. We have tried platformIO to compile it the browser-based IDE and their own IDE but the sample code did not work. Then we tried working with the MCP23508 and while we could get LEDs to light up. After a few nights work we did not get the interrupts working not on the Nucleo or on a Arduino UNO which was used for sanity checking our way of thinking. We even after consulting the documentation of the MCP we did not get it to work. We beleave  some adress asighment did not go right or wat not interperted right. The configuration was:
 
 | Register | Address | Value | binary    |
 |----------|---------|-------|-----------|

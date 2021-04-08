@@ -22,7 +22,9 @@ One of the Nucleos will act as the transmitter, the other as the reciever. They 
 
 ## Results
 
-Unfortunately we did not succeed in getting the nrf24l01+ running with a Nucleo. Therefore we where unable to collect any results. In the folder [/nrf24-packet-error-rate](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-packet-error-rate/PacketErrorRAte) a preliminary setup for the app can be found. This is a work-in-progress application and not near the final solution.
+Unfortunately we did not succeed in getting the nrf24l01+ running with a Nucleo. Please see [the implementation of the LED app chapter](https://rubensmit.github.io/wireless-communication/led-app/#implementation) for a more detailed description of the problems we faced and our attempts to overcome these.
+
+Ultimately we where unable to collect any results. In the folder [/nrf24-packet-error-rate](https://github.com/RubenSmit/wireless-communication/tree/main/nrf24-packet-error-rate/PacketErrorRAte) a preliminary setup for the app can be found. This is a work-in-progress application and not near the final solution.
 
 ## Conclusion
 
