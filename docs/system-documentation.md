@@ -11,7 +11,7 @@ The system will consist of three devices: a NRF52, a Android phone and a FiPy. E
 The NRF52 will act as a BLE Peripheral. A potentiometer will be attached to the NRF52 and the angle of this potentiometer can be read by a connected central.
 
 ### FiPy
-The FiPy will also act as a BLE Peripheral. It will be attached to a servo and the current angle of this servo can be read by a connected central. It will also be possible to set a new angle for the servo.
+The FiPy will act as a BLE Peripheral. It will be attached to a servo and the current angle of this servo can be read by a connected central. It will also be possible to set a new angle for the servo.
 
 ### Android phone
 On the android phone a appplication will run that displays a dashboard. It will function as a BLE Central and connect to NRF52 and FiPy peripherals. It wil read the angle of the potentiometers of connected NRF52 peripherals and display those on the dashboard. When the angle of a potentiometer changes the dashboard is updated. The current angle of the servos of connected FiPy peripherals is also displayed. Using the dashboard the angle of the servos can be changed.
@@ -40,7 +40,7 @@ This was chosen because we are setting the plane angle of the servo. The angle i
 The Android phone does not expose any services and characteristics. It does however read the angle of connected NRF52 peripherals and subscribes to notifications in changes to this angle. It also reads the angles of connected FiPy peripherals and writes a new angle if needed.
 
 ## System Usage
-TODO
+The following chapter will describe how the system can be used. First we descibe how each component of the system, the NRF52, FiPy and Android phone, must be prepared. Next we show how all components can be used together and how the dashboard can be used.
 
 ### Preparing the NRF52
 Follow the following steps to prepare the NRF52 with the attached potentiometer to be used as a Human Interface Device.
@@ -93,11 +93,19 @@ Connect the servo to the FiPy and the power supply on the breadboard according t
 Upload the code found in [/fipy](https://github.com/RubenSmit/wireless-communication/tree/main/fipy) to the FiPy using Visual Studio Code with the Pycom plugin.
 
 ### Preparing the Android phone
-TODO
-[/android](https://github.com/RubenSmit/wireless-communication/tree/main/android)
+To use a Android phone as central with dashboard in the system, upload the code found in [/android](https://github.com/RubenSmit/wireless-communication/tree/main/android) to a Android phone using Android studio.
 
 ### Operation
-TODO
+To use the system follow the following steps:
+
+1. Make sure all peripherals are turned on and prepared correctly.
+2. Open the application on the Android phone
+3. Press the big bluetooth button in the bottom right corner. The android device will now find and connect to all available peripherals. Please grant access to bluetooth and location services if requested.
+4. A list of available peripherals and their status is shown once they are connected as can be seen in the image below.
+
+![app-interface.png](app-interface.png)
+
+For each connected NRF52 a bar is shown displaying the current angle of the potentiometer. When the potentiometer is turned this bar is updated. Every connected FyPi is also shown in the list. It is possibe to set the angle of the FyPi using the slider. Using the source dropdown it is possible to connect the angle of the servo to the angle of a potentiometer. When the potentiometer is turned the angle of the servo will be matched.
 
 ## Code
 TODO
