@@ -1,6 +1,4 @@
-# NRF24L01+ documentation
-
-## General questions
+# General questions
 
 1. **What is the maximum output power from the NRF24 module?**
 	- 0 dBm [2]

@@ -1,4 +1,4 @@
-# Led APP
+# Led App
 
 ## pinout and functions of NRF24L01
 
